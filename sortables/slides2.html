@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>Sortables + mootools</title>
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="css/slides.css">
+	
+	<script type="text/javascript" src="mootools/mootools-beta-1.2b1.js"></script>
+	<script type="text/javascript">
+	window.addEvent('domready', function(){
+			new Sortables($('slideshow'));
+		});
+	</script>
+</head>
+
+<body>
+<h2>Slideshow Sorter + Mootools</h2>
+
+<ul id="slideshow" class="slideshow">
+	<li class="slide">
+		<div class="thumb handle"><img src="img/2.png"></div>
+		<div id="twoView" class="view">Slide 2</div>
+	</li>
+	<li class="slide">
+		<div class="thumb handle"><img src="img/3.png"></div>
+		<div id="threeView" class="view">Slide 3</div>
+	</li>
+	<li style="opacity: 1; z-index: auto; top: 0px; left: 0px;" class="slide">
+		<div class="thumb handle"><img src="img/1.png"></div>
+		<div id="oneView" class="view">Slide 1</div>
+	</li><li class="slide">
+		<div class="thumb handle"><img src="img/4.png"></div>
+		<div id="fourView" class="view">Slide 4</div>
+	</li>
+	<li class="slide">
+		<div class="thumb handle"><img src="img/5.png"></div>
+		<div id="fiveView" class="view">Slide 5</div>
+	</li>
+	<li class="slide">
+		<div class="thumb handle"><img src="img/6.png"></div>
+		<div id="sixView" class="view">Slide 6</div>
+	</li>
+	<li class="slide">
+		<div class="thumb handle">Only text!!</div>
+		<div id="sevenView" class="view">Slide 7</div>
+	</li>
+</ul>
+</body>
+</html>
