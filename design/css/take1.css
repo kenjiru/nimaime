@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+/* hack: 100% div height */
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#application {
+	position: absolute;
+	height: 99%;
+	width: 99%;
+	border: 1px solid black;
+}
+
+#leftPanel {
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	border: 1px solid red;
+}
+
+#rightPanel {
+	position: absolute;
+	width: 79%;
+	height: 100%;
+	margin-left: 21%;
+	border: 1px solid blue;
+}
+
+#rightPanel #title {
+	border: 1px solid green;
+}
+
+#rightPanel #fileList {
+	height: auto;
+	border: 1px solid orange;
+}

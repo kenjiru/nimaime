@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#application {
+	width: 700px;
+	height: 100%;
+	margin: auto; /* aliniaza orizontal pe centru */
+	padding: 5px;
+	border: 1px solid black;
+}
+
+/*
+ * Este o coloana float, deci trebuie sa aiba o dimensiune mai mica decat 
+ * cea mai mare coloana nefloat
+ */ 
+#leftPanel {
+	float: left;
+	width: 200px;
+	border: 1px solid red;
+}
+
+#rightPanel {
+	width: 450px;
+	height: auto;
+	margin-left: 210px;
+	border: 1px solid blue;
+}
+
+#rightPanel #title {
+	border: 1px solid green;
+}
+
+#rightPanel #fileList {
+	height: auto;
+	border: 1px solid orange;
+}
