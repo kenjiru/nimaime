@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>IE bug: div margin</title>
+	<style>
+	#container {
+		border: 1px solid black;
+	}
+	#left {
+		float: left;
+		width: 180px;
+		height: 1em;
+		border: 1px solid green;
+	}
+	#right {
+		margin-left: 200px;
+		border: 1px solid orange;
+	}
+	#inner {
+		border: 1px solid red;
+		height: 1em;
+	}
+	</style>
+</head>
+<body>
+<div id="left">Left</div>
+<div id="right">
+	<div id="inner">Fist inner</div>
+	<div id="inner">Second inner</div>
+</div>
+</body>
+</html>

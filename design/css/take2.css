@@ -8,17 +8,14 @@ body {
 }
 
 #application {
-	width: 700px;
-	height: 100%;
-	margin: auto; /* aliniaza orizontal pe centru */
+/*	width: 700p;*/
+/*	height: 100%;*/
+	margin: auto; /* alineaza orizontal pe centru */
 	padding: 5px;
 	border: 1px solid black;
 }
 
-/*
- * Este o coloana float, deci trebuie sa aiba o dimensiune mai mica decat 
- * cea mai mare coloana nefloat
- */ 
+/* Trebuie sa aiba o dimensiune mai mica decat cea mai mare coloana nefloat */
 #leftPanel {
 	float: left;
 	width: 200px;
@@ -26,17 +23,34 @@ body {
 }
 
 #rightPanel {
-	width: 450px;
 	height: auto;
 	margin-left: 210px;
 	border: 1px solid blue;
+	padding: 0;
 }
 
-#rightPanel #title {
+#titleBar {
 	border: 1px solid green;
 }
 
-#rightPanel #fileList {
-	height: auto;
+/* Trebuie sa aiba o inaltime fixa, pentru a forta inaltimea #rightPanel */
+#fileList {
+	height: 200px;
+	border: 1px solid orange;
+}
+
+#optionsMenu {
+	height: 1em;
+	border: 1px solid orange;
+}
+
+#optionsMenu ul, #optionsMenu li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#statusBar {
+	height: 1em;
 	border: 1px solid orange;
 }
