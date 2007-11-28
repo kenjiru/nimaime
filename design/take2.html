@@ -1,28 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Design Test no 2</title>
 	<link rel="stylesheet" type="text/css" media="screen" href="css/take2.css">
+	
+	<script type="text/javascript" src="js/mootools-beta-1.2b1.js"></script>
+	<script type="text/javascript">
+	var formShowed = null;
+	
+	function showForm (form) 
+	{
+		// daca este activ un form
+		if ($defined (formShowed)) {
+			formShowed.setStyle ('display', 'none');
+			if (formShowed == form) {
+				formShowed = null;
+				resizeLeftPanel ();
+				return;
+			}
+			formShowed = null;
+		}
+		form.setStyle ('display', 'block');
+		formShowed = form;
+		
+		resizeLeftPanel ();
+	}
+	
+	function resizeLeftPanel ()
+	{
+		var rHeight = $('rightPanel').getStyle('height').toInt();
+		var tHeight = $('titleBarLeft').getStyle('height').toInt();
+		alert ("rightPanel " + rHeight + "\n" +
+			"titleBarLeft height: " + tHeight);
+		$('folderList').setStyle('height', rHeight-2*tHeight);
+	}
+	
+	function init ()
+	{
+		$('detailsButton').addEvent ('click', function () {
+			showForm ($('detailsForm'));
+		});
+		$('uploadButton').addEvent ('click', function () {
+			showForm ($('uploadForm'));
+		});
+		
+		resizeLeftPanel ();
+	}
+	
+	window.addEvent('domready', init);
+	</script>
 </head>
+
+<!-- TODO:
+- design: cand apas dublu click pe un elem. din "optionsMenu" nu-l selecteze. -->
+
 <body>
-<!-- Fixed design -->
 <div id="application">
 	<div id="leftPanel">
-		Left Panel
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+		<div id="titleBarLeft">Left Panel - Title</div>
+		<div id="folderList">Folder List</div>
 	</div>
 	<div id="rightPanel">
-		<div id="titleBar">Titlu - folderul curent</div>
+		<div id="titleBarRight">Right Panel - Title - Current Folder</div>
 		<div id="fileList">File List</div>
 		<div id="optionsMenu">
 			<ul>
-				<li>Details | </li>
-				<li>Upload</li>
+				<li id="detailsButton">Details</li> 
+				<li id="uploadButton">Upload</li>
 			</ul>
 		</div>
 		<div id="uploadForm">Upload form</div>

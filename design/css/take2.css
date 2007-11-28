@@ -5,37 +5,75 @@ body {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	font-family: Verdana,Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
 }
 
 #application {
-/*	width: 700p;*/
-/*	height: 100%;*/
 	margin: auto; /* alineaza orizontal pe centru */
 	padding: 5px;
 	border: 1px solid black;
 }
 
+/*
+ * leftPanel
+ */
+
 /* Trebuie sa aiba o dimensiune mai mica decat cea mai mare coloana nefloat */
 #leftPanel {
 	float: left;
 	width: 200px;
-	border: 1px solid red;
+	padding: 4px;
+	border: 1px solid blue;
+	overflow: hidden;
 }
+
+#leftPanel div {
+	padding: 2px;
+	margin-top: 2px;
+}
+
+#titleBarLeft {
+/*	height: 1em;*/
+	border: 1px solid green;
+	font-weight: bold;
+}
+
+#folderList {
+	height: 460px;
+	border: 1px solid orange;
+}
+
+/*
+ * rightPanel
+ */
 
 #rightPanel {
 	height: auto;
-	margin-left: 210px;
+	margin-left: 215px;
+	padding: 4px;
 	border: 1px solid blue;
-	padding: 0;
 }
 
-#titleBar {
+#rightPanel div {
+	padding: 2px;
+	margin-top: 2px;
+}
+
+#titleBarRight {
+	height: 1em;
 	border: 1px solid green;
+	font-weight: bold;
 }
 
 /* Trebuie sa aiba o inaltime fixa, pentru a forta inaltimea #rightPanel */
 #fileList {
-	height: 200px;
+	height: 400px;
 	border: 1px solid orange;
 }
 
@@ -48,9 +86,16 @@ body {
 	display: inline;
 	margin: 0;
 	padding: 0;
+	cursor: hand;
+}
+
+#uploadForm, #detailsForm {
+	display: none;
+	height: 1em;
+	border: 1px solid red;
 }
 
 #statusBar {
 	height: 1em;
-	border: 1px solid orange;
+	border: 1px solid green;
 }

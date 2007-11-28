@@ -15,11 +15,12 @@ function SelectSlide (slide)
 
 function init ()
 {
+	alert ("salut!");
 	new Sortables($('slideshow'));
 	
 	// ataseaz ev. 'click' elem. cu id-ul 'slideshow'
 //	$('slideshow').addEvent('click', slideshow_onClick);
-/*
+
 	// ataseaz ev. 'click' elem. care au clasa 'slide'
 	var slides = $$("#slideshow .slide");
 	slides.each(function (slide) {
@@ -27,7 +28,6 @@ function init ()
 				SelectSlide (this);
 			});
 		});
-*/
 }
 
 window.addEvent('domready', init);
