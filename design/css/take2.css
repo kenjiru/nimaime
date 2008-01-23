@@ -45,7 +45,7 @@ body {
 }
 
 #folderList {
-	height: 460px;
+/*	height: 460px;*/
 	border: 1px solid orange;
 }
 
@@ -87,7 +87,7 @@ body {
 	display: inline;
 	margin: 0;
 	padding: 0;
-	cursor: hand;
+	cursor: pointer;
 }
 
 #uploadForm, #detailsForm {
@@ -99,4 +99,30 @@ body {
 #statusBar {
 	height: 1.4em;
 	border: 1px solid green;
+}
+
+/* listele de fisiere */
+#rootList {
+/*	border: 1px solid red;*/
+	padding: 0px;
+	margin: 0px;
+}
+#rootList li {
+	height: 24px;
+	list-style-type: none;
+	padding-left: 26px;
+	padding-top: 3px;
+	cursor: pointer;
+}
+
+#rootList .trash {
+	background: white url("../img/trash.png") left center no-repeat;
+}
+
+#rootList .folder {
+	background: white url("../img/folder.png") left center no-repeat;
+}
+
+#rootList .folder-hover {
+	background: white url("../img/folder-hover.png") left center no-repeat;
 }

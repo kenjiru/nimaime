@@ -2,9 +2,9 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Design Test no 2</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="css/take2.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>take2</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/take2.css"/>
 	
 	<script type="text/javascript" src="js/mootools-beta-1.2b1.js"></script>
 	<script type="text/javascript" src="js/take2.js"></script>
@@ -18,7 +18,14 @@
 <div id="application">
 	<div id="leftPanel">
 		<div id="titleBarLeft">Left Panel - Title</div>
-		<div id="folderList">Folder List</div>
+		<div id="folderList">
+			<ul id="rootList">
+				<li class="folder">Images</li>
+				<li class="folder">Movies</li>
+				<li class="folder">Text</li>
+				<li class="trash">Trash</li>
+			</ul>
+		</div>
 	</div>
 	<div id="rightPanel">
 		<div id="titleBarRight">Right Panel - Title - Current Folder</div>
