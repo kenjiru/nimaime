@@ -1,15 +1,7 @@
-/**
- * BUGS:
- * - drag & drop in IE, reason: .setStyles(this.getCoordinates()) 
- * - div-ul options apare peste obiectele mutate, solution: z-index
- */
- 
 // form-ul afisat
 var formShowed = null;
 // fisierul-ul selectat
 var selectedFile = null;
-// drag&drop - pozitia initiala
-var file_dragStart = null;
 	
 function showForm (form) 
 {
@@ -27,7 +19,7 @@ function showForm (form)
 }
 
 // mouseover deasupra unui folder
-function folderMouseOver (folder)
+function folderMouseover (folder)
 {
 	if (folder.className == 'folder') {
 		folder.removeClass ('folder');
@@ -36,7 +28,7 @@ function folderMouseOver (folder)
 }
 
 // mouseout deasupra unui folder
-function folderMouseOut (folder)
+function folderMouseout (folder)
 {
 	if (folder.className == 'folder-hover') {
 		folder.removeClass ('folder-hover');
@@ -56,53 +48,47 @@ function selectFile (file)
 	selectedFile = thumb;
 }
 
-// mousedown pt. un fisier
-function file_mousedown (file, ev)
+function fileMousedown (file, ev)
 {
-	file_dragStart = ev.page;
-	file_ob = file;
+	file.removeEvent ('mousedown', fileMousedown);
+	file.addEvent ('mousedown', false);
 	
-	document.addEvents ({
-		'mousemove' : file_drag_check,
-		'mouseup' : file_drag_cancel
+	ev = new Event(ev).stop();
+	var drop = $('trashFolder');
+
+	// clonez elementul	 
+	var clone = file.clone()
+		.setStyles({'opacity': 0.7, 'position': 'absolute'})
+		.setStyles(file.getCoordinates()) 
+		.addEvent('emptydrop', function() {
+			drop.removeEvents();
+			clone.remove();
+		}).inject($('fileList'));
+ 
+	drop.addEvents({
+		'drop': function() {
+			drop.removeEvents();
+			clone.remove();
+			file.remove();
+			
+			drop.removeClass ('trash-full');
+			drop.addClass ('trash');
+		},
+		'over': function() {
+			drop.removeClass ('trash');
+			drop.addClass ('trash-full');
+		},
+		'leave': function() {
+			drop.removeClass ('trash-full');
+			drop.addClass ('trash');
+		}
 	});
-}
-
-function file_drag_check (ev)
-{
-	ve = new Event(ev).stop();
-	
-	var distance = Math.round(Math.sqrt(Math.pow(ev.page.x - file_dragStart.x, 2) + Math.pow(ev.page.y - file_dragStart.y, 2)));
-	
-	if (distance > 6){
-		file_drag_cancel ();
-		
-		var drop = $('trashFolder');
-		
-		// clonez elementul	 
-		var clone = file_ob.clone()
-			.setStyles({'opacity': 0.7, 'position': 'absolute'})
-			.setStyles(file_ob.getCoordinates()) 
-			.addEvent('emptydrop', function() {
-				this.remove();
-			}).inject($('fileList'));
-		
-		var drag = clone.makeDraggable({
-			droppables: [drop]
-		}); 
-		
-		document.addEvent ('mouseup', function() {
-			clone.destroy();
-		});
-	 
-		drag.start(ev);
-	}
-}
-
-function file_drag_cancel ()
-{
-	document.removeEvent('mousemove', file_drag_check);
-	document.removeEvent('mouseup', file_drag_cancel);
+ 
+	var drag = clone.makeDraggable({
+		droppables: [drop]
+	}); 
+ 
+	drag.start(ev); 
 }
 
 function init ()
@@ -121,14 +107,14 @@ function init ()
 	folders.each(function (folder) {
 		folder.addEvents ({
 			'mouseover' : function () {
-				folderMouseOver (this);
+				folderMouseover (this);
 			},
 			'mouseout' : function () {
-				folderMouseOut (this);
+				folderMouseout (this);
 			},
 			// drag & drop
 			'over' : function () {
-				folderMouseOver (this);
+				folderMouseover (this);
 			},
 			// urm. 2 ev. fac el. non-selectabil in IE
 			'selectstart' : function () {
@@ -151,11 +137,10 @@ function init ()
 	});
 */	
 	var files = $('fileList').getChildren();
-	var drop = $('trashFolder');
 	
 	files.each(function(file){
 		file.addEvent('mousedown', function(ev) {
-			file_mousedown (file, ev);
+			fileMousedown (file, ev);
 		});
 	});
 }
