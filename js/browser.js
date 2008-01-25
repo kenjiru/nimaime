@@ -84,12 +84,55 @@ function init ()
 	});
 	
 	// sortables
-	var s = new Sortables($('fileList'));
+/*	var s = new Sortables($('fileList'));
 	
 	var files = $("fileList").getChildren();
 	files.each(function (file) {
 		file.addEvent ('mousedown', function () {
 			selectFile (this);
+		});
+	});
+*/	
+	var files = $('fileList').getChildren();
+	var drop = $('trashFolder');
+	
+	files.each(function(file){
+		file.addEvent('mousedown', function(ev) {
+			ev = new Event(ev).stop();
+			
+			// clonez elementul	 
+			var clone = this.clone()
+				.setStyles(this.getCoordinates()) 
+				.setStyles({'opacity': 0.7, 'position': 'absolute'})
+				.addEvent('emptydrop', function() {
+					this.remove();
+					drop.removeEvents();
+				}).inject($('fileList'));
+	 
+			drop.addEvents({
+				'drop': function() {
+					drop.removeEvents();
+					clone.remove();
+					file.remove();
+					
+					drop.removeClass ('trash-full');
+					drop.addClass ('trash');
+				},
+				'over': function() {
+					drop.removeClass ('trash');
+					drop.addClass ('trash-full');
+				},
+				'leave': function() {
+					drop.removeClass ('trash-full');
+					drop.addClass ('trash');
+				}
+			});
+	 
+			var drag = clone.makeDraggable({
+				droppables: [drop]
+			}); 
+	 
+			drag.start(ev); 
 		});
 	});
 }

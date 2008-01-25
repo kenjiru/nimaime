@@ -128,6 +128,10 @@ body {
 	background: url("../img/trash.png") left center no-repeat;
 }
 
+#folderList .trash-full {
+	background: url("../img/trash-full.png") left center no-repeat;
+}
+
 #folderList .folder {
 	background: url("../img/folder.png") left center no-repeat;
 }
