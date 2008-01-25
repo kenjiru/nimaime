@@ -1,3 +1,10 @@
+/**
+ * About: 
+ * - implements drag and drop for the file list
+ * 
+ * Bugs:
+ * - when you click on a file, without dragging it, a new copy is created
+ */
 // form-ul afisat
 var formShowed = null;
 // fisierul-ul selectat
@@ -141,6 +148,7 @@ function init ()
 	files.each(function(file){
 		file.addEvent('mousedown', function(ev) {
 			fileMousedown (file, ev);
+			return false;
 		});
 	});
 }
