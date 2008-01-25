@@ -8,6 +8,8 @@
 var formShowed = null;
 // fisierul-ul selectat
 var selectedFile = null;
+// drag&drop - pozitia initiala
+var file_dragStart = null;
 	
 function showForm (form) 
 {
@@ -52,6 +54,55 @@ function selectFile (file)
 	thumb.addClass ("selected");
 	
 	selectedFile = thumb;
+}
+
+// mousedown pt. un fisier
+function file_mousedown (file, ev)
+{
+	file_dragStart = ev.page;
+	file_ob = file;
+	
+	document.addEvents ({
+		'mousemove' : file_drag_check,
+		'mouseup' : file_drag_cancel
+	});
+}
+
+function file_drag_check (ev)
+{
+	ve = new Event(ev).stop();
+	
+	var distance = Math.round(Math.sqrt(Math.pow(ev.page.x - file_dragStart.x, 2) + Math.pow(ev.page.y - file_dragStart.y, 2)));
+	
+	if (distance > 6){
+		file_drag_cancel ();
+		
+		var drop = $('trashFolder');
+		
+		// clonez elementul	 
+		var clone = file_ob.clone()
+			.setStyles({'opacity': 0.7, 'position': 'absolute'})
+			.setStyles(file_ob.getCoordinates()) 
+			.addEvent('emptydrop', function() {
+				this.remove();
+			}).inject($('fileList'));
+		
+		var drag = clone.makeDraggable({
+			droppables: [drop]
+		}); 
+		
+		document.addEvent ('mouseup', function() {
+			clone.destroy();
+		});
+	 
+		drag.start(ev);
+	}
+}
+
+function file_drag_cancel ()
+{
+	document.removeEvent('mousemove', file_drag_check);
+	document.removeEvent('mouseup', file_drag_cancel);
 }
 
 function init ()
@@ -104,41 +155,7 @@ function init ()
 	
 	files.each(function(file){
 		file.addEvent('mousedown', function(ev) {
-			ev = new Event(ev).stop();
-			
-			// clonez elementul	 
-			var clone = this.clone()
-				.setStyles({'opacity': 0.7, 'position': 'absolute'})
-				.setStyles(this.getCoordinates()) 
-				.addEvent('emptydrop', function() {
-					this.remove();
-					drop.removeEvents();
-				}).inject($('fileList'));
-	 
-			drop.addEvents({
-				'drop': function() {
-					drop.removeEvents();
-					clone.remove();
-					file.remove();
-					
-					drop.removeClass ('trash-full');
-					drop.addClass ('trash');
-				},
-				'over': function() {
-					drop.removeClass ('trash');
-					drop.addClass ('trash-full');
-				},
-				'leave': function() {
-					drop.removeClass ('trash-full');
-					drop.addClass ('trash');
-				}
-			});
-	 
-			var drag = clone.makeDraggable({
-				droppables: [drop]
-			}); 
-	 
-			drag.start(ev); 
+			file_mousedown (file, ev);
 		});
 	});
 }
