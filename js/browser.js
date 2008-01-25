@@ -1,3 +1,9 @@
+/**
+ * BUGS:
+ * - drag & drop in IE, reason: .setStyles(this.getCoordinates()) 
+ * - div-ul options apare peste obiectele mutate, solution: z-index
+ */
+ 
 // form-ul afisat
 var formShowed = null;
 // fisierul-ul selectat
@@ -54,11 +60,11 @@ function init ()
 /*	$('detailsButton').addEvent ('click', function () {
 		showForm ($('detailsForm'));
 	});
-
+*/
 	$('uploadButton').addEvent ('click', function () {
 		showForm ($('uploadForm'));
 	});
-*/
+
 	// atasam ev. pt. "folders"
 	var folders = $('folderList').getChildren();
 	folders.each(function (folder) {
@@ -102,8 +108,8 @@ function init ()
 			
 			// clonez elementul	 
 			var clone = this.clone()
-				.setStyles(this.getCoordinates()) 
 				.setStyles({'opacity': 0.7, 'position': 'absolute'})
+				.setStyles(this.getCoordinates()) 
 				.addEvent('emptydrop', function() {
 					this.remove();
 					drop.removeEvents();
