@@ -38,6 +38,28 @@ function folderMouseout (folder)
 	}
 }
 
+function folderClick (folder)
+{
+	var dir = folder.getText();
+	var url = 'cmds.php?action=ls&dir=' + dir;
+	
+	var myRequest = new Request({
+		'url' : url, 
+		'method' : 'get',
+		'onSuccess' : function(reponseText, responseXML) {
+			$('fileList').setHTML(reponseText);
+			
+			var files = $('fileList').getChildren();
+			files.each(function(file){
+				file.addEvent('mousedown', function(ev) {
+					fileMousedown (file, ev);
+					return false;
+				});
+			});
+		}
+	}).send();
+}
+
 // mousedown pt. un fisier
 function fileMousedown (file, ev)
 {
@@ -125,6 +147,10 @@ function init ()
 	var folders = $('folderList').getChildren();
 	folders.each(function (folder) {
 		folder.addEvents ({
+			'click' : function() {
+				if (folder.className != "trash")
+					folderClick (this);
+			},
 			'mouseover' : function () {
 				folderMouseover (this);
 			},
@@ -142,15 +168,6 @@ function init ()
 			'mousedown' : function () {
 				return false;
 			}
-		});
-	});
-	
-	var files = $('fileList').getChildren();
-	
-	files.each(function(file){
-		file.addEvent('mousedown', function(ev) {
-			fileMousedown (file, ev);
-			return false;
 		});
 	});
 }
