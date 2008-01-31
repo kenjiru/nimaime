@@ -1,29 +1,48 @@
 @CHARSET "UTF-8";
 
-div.multiupload{
+.inputfiles {
+	width: 350px;
+	position: absolute;
+	text-align: right;
+}
+
+.fakefile {
+	width: 350px;
+	position: absolute;
+	text-align: right;
+	z-index: 1;
+}
+
+.realfile {
+	opacity: 0;
+	position: relative;
+	x-index: 2;
+	text-align: right;
+}
+
+.multiupload{
 	width: 300px;
 	border:1px outset gray;
 	float:left;
 	padding:3px;
 	background:#eee;
 }
-div.multiupload div.list{
+.multiupload div.list{
 	border:1px inset gray;
 	background: #fff;
 }
-div.multiupload div.list img.delete{
+.multiupload .list .ext{
+	margin: 1px;
+	float: left;
+}
+.multiupload .list .delete{
 	margin: 1px;
 	float: right;
 }
-div.multiupload div.list div.item{
+.multiupload .list .item{
 	margin:1px;
 	background: #eee;
 }
-div.multiupload div.list div.item:hover{
+.multiupload .list .item:hover{
 	background: #ccc;
-}
-div.multiupload div.list img{
-	float:left;
-	margin: 3px;
-	cursor:pointer;
 }
