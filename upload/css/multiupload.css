@@ -1,43 +1,34 @@
 @CHARSET "UTF-8";
 
-.inputfiles {
-	width: 350px;
-	position: absolute;
-	text-align: right;
-}
-
-.fakefile {
-	width: 350px;
-	position: absolute;
-	text-align: right;
-	z-index: 1;
-}
-
-.realfile {
-	opacity: 0;
-	position: relative;
-	x-index: 2;
-	text-align: right;
-}
-
 .multiupload{
-	width: 300px;
-	border:1px outset gray;
-	float:left;
-	padding:3px;
-	background:#eee;
+	width: 400px;
+	border: 1px outset gray;
+	float: left;
+	padding: 4px;
+	background: #eee;
 }
-.multiupload div.list{
-	border:1px inset gray;
+.multiupload .file{
+	float: left;
+}
+.multiupload .submit{
+	float: right;
+}
+.multiupload .list{
+	margin-top: 28px;
+	border:1px solid #ccc;
 	background: #fff;
+	clear:both;
 }
 .multiupload .list .ext{
 	margin: 1px;
 	float: left;
+	margin-top: 4px;
 }
 .multiupload .list .delete{
 	margin: 1px;
 	float: right;
+	margin-top: 4px;
+	cursor:pointer;
 }
 .multiupload .list .item{
 	margin:1px;
@@ -45,4 +36,8 @@
 }
 .multiupload .list .item:hover{
 	background: #ccc;
+}
+
+.hidden {
+	display: none;
 }

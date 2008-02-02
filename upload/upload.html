@@ -9,16 +9,19 @@
 	
 <script type="text/javascript">
 window.addEvent('domready', function(){
-	var MyUpload = new MultiUpload( $('main_form').first_element );
+	var MyUpload = new MultiUpload($('main_form').first_element, "(\.jpg)|(\.png)");
+	MyUpload.setFileExtension("\.txt");
 });
 </script>
 </head>
 
 <body>
 
-<form id="main_form" class="uploadform" method="POST" enctype="multipart/form-data" action="myaction">
+<form id="main_form" method="POST" enctype="multipart/form-data" target="upload_iframe" action="result.html">
 	<input type="file" name="first_element"/>
 </form>
 
+<!-- Upload IFRAME -->
+<iframe name="upload_iframe" style="width: 10px; height: 10px; display: none;"></iframe>
 </body>
 </html>
