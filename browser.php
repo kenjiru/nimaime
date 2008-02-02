@@ -8,7 +8,8 @@ if (false === ($dir_h = opendir($root_dir)))
 	die;
 
 while (false !== ($dir = readdir ($dir_h))) {
-	if (array_search($dir, $ignore_dirs) === false && is_dir ($root_dir. $dir)) {
+	if (array_search($dir, $ignore_dirs) === false &&
+		$dir[0] != "." && is_dir ($root_dir. $dir)) {
 		array_push ($child_dirs, $dir);
 	}
 }

@@ -1,6 +1,32 @@
 Project Plan
 ============
 
+Timeline
+========
+Milestone 1:
+- listare directoare
+- crearea thumbanil pt. imagini
+- drag&drop in recycle bin
+
+Milestone 2:
+- design pt. upload de fisiere
+- fc. de upload
+- fc. de delete
+
+Milestone 3:
+- rename in place
+- editare atribute fisiere
+- generarea fis. XML
+
+Milestone 4:
+- upload cu raportarea progresului
+
+Idei upload:
+- selectez fisiere multiple si le adaug intr-o lista
+- fisierele pot fi sterse din lista
+- un buton upload si fac upload la toate fisierele
+- afisarea progresului
+
 Continut
 ========
 Categorii de continut:

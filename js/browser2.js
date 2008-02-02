@@ -4,7 +4,10 @@ var formShowed = null;
 var file_mousePos = null;
 var file_dragged = null;
 var file_clone = null;
-	
+/* folder list variables */
+var current_folder = null;
+
+// afiseaza form-ul pt. upload
 function showForm (form) 
 {
 	// daca deja este afisat un form, il ascundem
@@ -38,6 +41,7 @@ function folderMouseout (folder)
 	}
 }
 
+// click pe un folder
 function folderClick (folder)
 {
 	var dir = folder.getText();
@@ -47,17 +51,27 @@ function folderClick (folder)
 		'url' : url, 
 		'method' : 'get',
 		'onSuccess' : function(reponseText, responseXML) {
-			$('fileList').setHTML(reponseText);
-			
-			var files = $('fileList').getChildren();
-			files.each(function(file){
-				file.addEvent('mousedown', function(ev) {
-					fileMousedown (file, ev);
-					return false;
-				});
-			});
+			current_folder = dir;
+			folderLoad(reponseText, responseXML);
 		}
 	}).send();
+}
+
+function folderLoad (reponseText, responseXML)
+{
+	// sets the action for the upload form
+	// sets the file extensions for the upload form
+	
+	// TODO: do this with JSON
+	$('fileList').setHTML(reponseText);
+	
+	var files = $('fileList').getChildren();
+	files.each(function(file){
+		file.addEvent('mousedown', function(ev) {
+			fileMousedown (file, ev);
+			return false;
+		});
+	});
 }
 
 // mousedown pt. un fisier
@@ -88,7 +102,8 @@ function fileDragCancel (ev)
 // checks if we can start dragging
 function fileDragCheck (ev)
 {
-	var distance = Math.round(Math.sqrt(Math.pow(ev.page.x - file_mousePos.x, 2) + Math.pow(ev.page.y - file_mousePos.y, 2)));
+	var distance = Math.round(Math.sqrt(Math.pow(ev.page.x - file_mousePos.x, 2) 
+		+ Math.pow(ev.page.y - file_mousePos.y, 2)));
 	
 	if (distance > 2) {
 		fileDragCancel ();
