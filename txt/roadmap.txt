@@ -4,22 +4,22 @@ Project Plan
 Timeline
 ========
 Milestone 1:
-- listare directoare
-- crearea thumbanil pt. imagini
-- drag&drop in recycle bin
+- directory listing
+- generating thumbnails for images
+- drag and drop files
 
 Milestone 2:
-- design pt. upload de fisiere
-- fc. de upload
-- fc. de delete
+- file upload support
+- delete files by dragging and dropping them in the recile bin
 
 Milestone 3:
-- rename in place
-- editare atribute fisiere
-- generarea fis. XML
+- generate XML files
+- edit file attributes
 
 Milestone 4:
-- upload cu raportarea progresului
+- rename in place
+- add other image file support
+- upload with progress bars
 
 Idei upload:
 - selectez fisiere multiple si le adaug intr-o lista

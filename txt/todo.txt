@@ -1,0 +1,11 @@
+PHP:
+- escape all GET variables
+- authentication
+
+Application:
+- preload application images
+- error handling for Ajax actions (onFailed, etc..)
+
+Upload:
+- show custom image for different file type
+- check for double files

@@ -1,0 +1,8 @@
+Major bugs
+==========
+Drag and drop related:
+- when the fileList is scrolled
+- when you drag and drop slowly
+
+Uploading related:
+- when I get an error, the page is stalled
