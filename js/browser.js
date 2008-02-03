@@ -1,3 +1,8 @@
+/**
+ * TODO:
+ * - replace addClass() and removeClass() with className property 
+ */
+
 // form-ul afisat
 var formShowed = null;
 // drag&drop - pozitia initiala
@@ -22,6 +27,10 @@ function showForm (form)
 		}
 		formShowed = null;
 	}
+	// cancel if no form showed
+	if (! $defined(current_folder))
+		return;
+		
 	form.setStyle ('display', 'block');
 	formShowed = form;
 }
@@ -84,6 +93,8 @@ function folderLoad (reponseText, responseXML)
 			break;
 	} 
 	multiUpload.setFileExtensions(ext);
+	// check if we need to reset the upload form
+	multiUpload.checkReset();
 	
 	// change the icons
 	if ($defined(current_folder))
@@ -164,10 +175,10 @@ function fileDragCheck (ev)
 			'drop': function() {
 				drop.removeEvents();
 				file_clone.remove();
-				file_dragged.remove();
-				
 				drop.removeClass ('trash-full');
 				drop.addClass ('trash');
+				// call the user function
+				fileDragStop(file_dragged);
 			},
 			'over': function() {
 				drop.removeClass ('trash');
@@ -187,6 +198,23 @@ function fileDragCheck (ev)
 	}
 
 	return false;
+}
+
+function fileDragStop(file)
+{
+	var file_name = file.getElementsByTagName('div')[1].getText();
+	var folder_name = current_folder.getText();
+	var url = 'delete.php?dir=' + folder_name + '&file=' + file_name;
+	
+	var myRequest = new Request({
+		'url' : url, 
+		'method' : 'get',
+		'onSuccess' : function(reponseText, responseXML) {
+			// TODO: handle errors
+			var result = eval(reponseText);
+			file.remove();
+		}
+	}).send();
 }
 
 /* Adds a file */
@@ -211,7 +239,13 @@ function addFile (file)
 	);
 	var li = new Element(
 		'li', {
-			'class': 'file'
+			'class': 'file',
+			'events': {
+				'mousedown' : function(ev) {
+					fileMousedown (li, ev);
+					return false;
+				}
+			}
 		}
 	);
 	name_div.setText(file.name);

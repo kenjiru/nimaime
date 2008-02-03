@@ -1,9 +1,6 @@
 <?php
 require_once ("includes/config.inc.php");
 
-// we are listing the files in a directory
-$files_arr = array();
-
 $dir = null;
 if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
@@ -13,6 +10,9 @@ else
 if (false === ($dir_h = opendir($root_dir. $dir)))
 	die ('could not open directory');
 
+// we are listing the files in a directory
+$files_arr = array();
+	
 while (false !== ($file = readdir ($dir_h))) {
 	if (is_file($root_dir. $dir. "/". $file)) {
 		$f['name'] = $file;
