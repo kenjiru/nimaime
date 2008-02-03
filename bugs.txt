@@ -1,0 +1,4 @@
+Major bugs
+==========
+- draging and droping files from the fileList when scrolled
+- drag and drop slowly

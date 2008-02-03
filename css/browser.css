@@ -65,7 +65,7 @@ body {
 	border: 1px solid blue;
 }
 
-#rightPanel #titleBar {
+#rightPanel #folderName {
 	height: 1.4em;
 	padding: 2px;
 	border: 1px solid green;
@@ -109,9 +109,8 @@ body {
 
 #uploadForm, #detailsForm {
 	display: none;
-	height: 1.4em;
 	margin-top: 4px;
-	border: 1px solid red;
+	border: 1px solid #ccc;
 }
 
 /*
@@ -141,4 +140,7 @@ body {
 
 #folderList .folder-hover {
 	background: url("../img/folder-hover.png") left center no-repeat;
+}
+#folderList .folder-open {
+	background: url("../img/folder-open.png") left center no-repeat;
 }

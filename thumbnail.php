@@ -1,6 +1,4 @@
 <?php
-header('Content-type: image/jpeg');
-
 require_once ("includes/config.inc.php");
 
 $dir = null;
@@ -15,42 +13,72 @@ if (isset($_GET['file']))
 else
 	die("file not specified!");
 
-$file_name = $root_dir. $dir. "/". $file;
+$file_name = $file;
+$file_src = $root_dir. $dir. "/". $file_name;
+$file_ext = strtolower(strrchr($file_name,"."));
 
-list($width, $height) = getimagesize($file_name);
+if ($file_ext === ".jpg") {
+	// create thumbnail for image file
+	header('Content-type: image/jpeg');
 
-$new_width = 160;
-$new_height = 160;
-
-$proportion_X = $width / $new_width;
-$proportion_Y = $height / $new_height;
-
-if ($proportion_X > $proportion_Y ){
-	$proportion = $proportion_Y;
-} else {
-	$proportion = $proportion_X ;
+	list($image_width, $image_height) = getimagesize($file_src);
+	// calculate the proportions
+	$proportion_X = $image_width / $thumb_width;
+	$proportion_Y = $image_height / $thumb_height;
+	if ($proportion_X > $proportion_Y ){
+		$proportion = $proportion_Y;
+	} else {
+		$proportion = $proportion_X ;
+	}
+	
+	$target['width'] = $thumb_width * $proportion;
+	$target['height'] = $thumb_height * $proportion;
+	
+	$original['diagonal_center'] = round(sqrt(($image_width*$image_width)+($image_height*$image_height))/2);
+	$target['diagonal_center'] = round(sqrt(($target['width']*$target['width']) + ($target['height']*$target['height']))/2);
+	
+	$crop = round($original['diagonal_center'] - $target['diagonal_center']);
+	
+	if($proportion_X < $proportion_Y ){
+		$target['x'] = 0;
+		$target['y'] = round((($image_height/2)*$crop)/$target['diagonal_center']);
+	}else{
+		$target['x'] =  round((($image_width/2)*$crop)/$target['diagonal_center']);
+		$target['y'] = 0;
+	}
+	
+	$thumbnail = imagecreatetruecolor ($thumb_width, $thumb_height);
+	$source = imagecreatefromjpeg ($file_src);
+	imagecopyresampled ($thumbnail,  $source,  0, 0, $target['x'], $target['y'], $thumb_width, $thumb_height, $target['width'], $target['height']);
+	
+	imagejpeg ($thumbnail, null, 100);
+} elseif ($file_ext === ".txt") {
+	header('Content-type: image/jpeg');
+	// create thumbnail for text file
+	$width = $thumb_width;
+	$height = $thumb_height;
+	$font = 4; // "3" is a default font in the GD library.
+	
+	$lines = file($file_src);
+	$fontWidth = imagefontwidth($font);
+	$fontHeight = imagefontheight($font);
+	$maxCharsPerLine = ($width / $fontWidth) - 2;
+	$maxLines = ($height / $fontHeight) - 2;
+	$lineHeight = $fontHeight + 1;
+	
+	$image = imagecreatetruecolor($width, $height);
+	$black = imagecolorallocate($image, 0, 0, 0);
+	$white = imagecolorclosest($image, 255, 255, 255);
+	imagefill($image, 0, 0, $white);
+	
+	for($i = 0; $i < $maxLines; $i++) {
+	    $line = (strlen($lines[$i]) > $maxCharsPerLine) ? substr($lines[$i], 0, $maxCharsPerLine) : $lines[$i];
+//	    $line = ereg_replace("\t", "  ", $line);
+	    $line = ereg_replace("[\r \n \t]", "", $line); 
+	    imagestring($image, $font, 3, ($i * $lineHeight), $line, $black);
+	}
+	
+	imagejpeg($image, null, 100);
 }
-
-$target['width'] = $new_width * $proportion;
-$target['height'] = $new_height * $proportion;
-
-$original['diagonal_center'] = round(sqrt(($width*$width)+($height*$height))/2);
-$target['diagonal_center'] = round(sqrt(($target['width']*$target['width']) + ($target['height']*$target['height']))/2);
-
-$crop = round($original['diagonal_center'] - $target['diagonal_center']);
-
-if($proportion_X < $proportion_Y ){
-	$target['x'] = 0;
-	$target['y'] = round((($height/2)*$crop)/$target['diagonal_center']);
-}else{
-	$target['x'] =  round((($width/2)*$crop)/$target['diagonal_center']);
-	$target['y'] = 0;
-}
-
-$thumbnail = imagecreatetruecolor ($new_width, $new_height);
-$source = imagecreatefromjpeg ($file_name);
-imagecopyresampled ($thumbnail,  $source,  0, 0, $target['x'], $target['y'], $new_width, $new_height, $target['width'], $target['height']);
-
-imagejpeg ($thumbnail, null, 100);
 
 ?>

@@ -1,43 +1,41 @@
 @CHARSET "UTF-8";
 
-.file {
-	position: relative;
+#fileList .file {
 	float: left;
-	width: 160px;
-	height: 160px;
+/*	width: 160px;*/
+/*	height: 160px;*/
 	margin-bottom: 4px;
-	margin-right: 10px;
-	background: white url("../img/trash.png") left center no-repeat;
+	margin-right: 4px;
 	cursor: pointer;
-}
-
-.file .thumb {
-	width: 160px;
-	height: 160px;
-	background: #fff;
-	height: 120px;
-	font-size: 16px;
-	font-family: "Times New Roman", serif;
 	overflow: hidden;
 }
 
-.file .name {
+#fileList .file .thumb {
+	width: 160px;
+	height: 120px;
+	border: 1px solid black;
+	background: #fff;
+	overflow: hidden;
+}
+
+#fileList .file .name {
 	width: 160px;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #ccc;
 	background-color: #eee;
 	text-align: center;
+	overflow: hidden;
 }
 
-.file .name:hover {
+#fileList .file .name:hover {
 	background-color: #ffffcc;
 }
 
-.file .normal {
+#fileList .file .normal {
 	border: 1px solid #000;
 }
 
-.file .selected {
+#fileList .file .selected {
 	border: 1px solid red;
 }

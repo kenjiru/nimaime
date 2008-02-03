@@ -6,6 +6,9 @@ var file_dragged = null;
 var file_clone = null;
 /* folder list variables */
 var current_folder = null;
+var changed_folder = null;
+var can_change = true;
+var multiUpload = null;
 
 // afiseaza form-ul pt. upload
 function showForm (form) 
@@ -44,14 +47,19 @@ function folderMouseout (folder)
 // click pe un folder
 function folderClick (folder)
 {
-	var dir = folder.getText();
-	var url = 'cmds.php?action=ls&dir=' + dir;
+	if(!can_change) {
+		alert ("You can't change the folder while uploading!");
+		return;
+	}
+	
+	var folder_name = folder.getText();
+	var url = 'list.php?dir=' + folder_name;
 	
 	var myRequest = new Request({
 		'url' : url, 
 		'method' : 'get',
 		'onSuccess' : function(reponseText, responseXML) {
-			current_folder = dir;
+			changed_folder = folder;
 			folderLoad(reponseText, responseXML);
 		}
 	}).send();
@@ -59,8 +67,29 @@ function folderClick (folder)
 
 function folderLoad (reponseText, responseXML)
 {
+	var folder_name = changed_folder.getText().trim();
 	// sets the action for the upload form
+	$('upload_form').action = 'upload.php?dir=' + folder_name;
 	// sets the file extensions for the upload form
+	var ext = '';
+	switch (folder_name) {
+		case 'Images':
+			ext = '\.jpg';
+			break; 
+		case 'Movies':
+			ext = '\.flv';
+			break;
+		case 'Text':
+			ext = '\.txt';
+			break;
+	} 
+	multiUpload.setFileExtensions(ext);
+	
+	// change the icons
+	if ($defined(current_folder))
+		current_folder.className = 'folder';
+	changed_folder.className = 'folder-open';
+	current_folder = changed_folder;
 	
 	// TODO: do this with JSON
 	$('fileList').setHTML(reponseText);
@@ -71,6 +100,19 @@ function folderLoad (reponseText, responseXML)
 			fileMousedown (file, ev);
 			return false;
 		});
+	});
+}
+
+function uploadStart()
+{
+	can_change = false;
+}
+
+function uploadResponse(files)
+{
+	can_change = true;
+	$each(files, function(file){
+		addFile(file);
 	});
 }
 
@@ -147,13 +189,39 @@ function fileDragCheck (ev)
 	return false;
 }
 
+/* Adds a file */
+function addFile (file)
+{
+	var thumb_div = new Element(
+		'div', {
+			'class': 'thumb normal'
+		}
+	);
+	var thumb_img = new Element(
+		'img', {
+			'src': file.src,
+			'alt': file.name,
+			'title': file.src,
+		}
+	);
+	var name_div = new Element(
+		'div', {
+			'class': 'name'
+		}
+	);
+	var li = new Element(
+		'li', {
+			'class': 'file'
+		}
+	);
+	name_div.setText(file.name);
+	thumb_div.adopt(thumb_img);
+	li.adopt(thumb_div).adopt(name_div);
+	$('fileList').adopt(li);
+}
+
 function init ()
 {
-	// atasam ev. pt. "optionsMenu"
-/*	$('detailsButton').addEvent ('click', function () {
-		showForm ($('detailsForm'));
-	});
-*/
 	$('uploadButton').addEvent ('click', function () {
 		showForm ($('uploadForm'));
 	});
@@ -184,6 +252,12 @@ function init ()
 				return false;
 			}
 		});
+	});
+	
+	multiUpload = new MultiUpload($('upload_form').getElementsByTagName('input')[0], "(\.jpg)|(\.png)");
+	multiUpload.addEvents({
+		'onStart': uploadStart,
+		'onResponse': uploadResponse
 	});
 }
 
