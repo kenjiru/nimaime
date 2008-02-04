@@ -100,9 +100,17 @@ function uploadStart()
 	can_change = false;
 }
 
-function uploadResponse(files)
+function uploadResponse()
 {
 	can_change = true;
+	var doc = window.frames['upload_iframe'].document;
+	var msg = doc.upload_msg;
+	var files = doc.upload_files;
+	// write the message
+	if($defined(msg)) {
+		$('upload_msg').setHTML(msg);
+	}
+	// add the files
 	$each(files, function(file){
 		addFile(file);
 	});
@@ -279,7 +287,7 @@ function init ()
 	});
 	
 	multiUpload = new MultiUpload(
-		$('upload_form'),
+		$('upload_iframe'),
 		$('upload_form').getElementsByTagName('input')[0], 
 		"(\.jpg)|(\.png)"
 	);

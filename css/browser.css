@@ -3,7 +3,6 @@
  * TODO:
  * - sa testez selctorul :hover pt. folderList
  */
-
 body {
 	height: 100%; 
 	margin: 0;
@@ -13,7 +12,6 @@ body {
 	font-size: 12px;
 	font-size-adjust: none;
 }
-
 .hidden {
 	display: none;
 	visibility: hidden;
@@ -23,7 +21,6 @@ body {
 /*
  * leftPanel
  */
-
 /* Trebuie sa aiba o dimensiune mai mica decat cea mai mare coloana nefloat */
 #leftPanel {
 	float: left;
@@ -34,14 +31,12 @@ body {
 	border: 1px solid blue;
 	overflow: hidden;
 }
-
 #leftPanel #titleBar {
 	height: 1.4em;
 	padding: 2px;
 	border: 1px solid green;
 	font-weight: bold;
 }
-
 #leftPanel #folderList {
 	height: 460px;
 	padding: 4px;
@@ -54,8 +49,7 @@ body {
 /*
  * rightContainer
  */
- 
- #rightContainer {
+  #rightContainer {
  	float:left;
  	margin-left: 2px;
  }
@@ -63,21 +57,18 @@ body {
 /*
  * rightPanel
  */
-
 #rightPanel {
 	height: auto;
 	width: 600px;
 	padding: 4px;
 	border: 1px solid blue;
 }
-
 #rightPanel #folderName {
 	height: 1.4em;
 	padding: 2px;
 	border: 1px solid green;
 	font-weight: bold;
 }
-
 #rightPanel #fileList {
 	height: 460px;
 	overflow: auto;
@@ -91,28 +82,24 @@ body {
 /*
  * optionsPanel
  */
- 
-#optionsPanel {
+ #optionsPanel {
 	height: auto;
 	width: 600px;
 	margin-top: 4px;
 	padding: 4px;
 	border: 1px solid blue;
 }
-
 #optionsMenu {
 	height: 1.4em;
 	padding: 2px;
 	border: 1px solid orange;
 }
-
 #optionsMenu ul, #optionsMenu li {
 	display: inline;
 	margin: 0;
 	padding: 0;
 	cursor: pointer;
 }
-
 #uploadForm, #detailsForm {
 	display: none;
 	margin-top: 4px;
@@ -122,7 +109,6 @@ body {
 /*
  * leftPanel - lista de directoare
  */
-
 #folderList li {
 	z-index: -1;
 	height: 24px;
@@ -131,19 +117,15 @@ body {
 	padding-top: 3px;
 	cursor: pointer;
 }
-
 #folderList .trash {
 	background: url("../img/trash.png") left center no-repeat;
 }
-
 #folderList .trash-full {
 	background: url("../img/trash-full.png") left center no-repeat;
 }
-
 #folderList .folder {
 	background: url("../img/folder.png") left center no-repeat;
 }
-
 #folderList .folder:hover {
 	background: url("../img/folder-hover.png") left center no-repeat;
 }

@@ -4,24 +4,24 @@ var MultiUpload = new Class({
 		onResponse: Class.empty
 	},
 	/* Class constructor */
-	initialize: function(form, input_element, file_ext) {
+	initialize: function(upload_iframe, input_element, file_ext) {
 		// check if it's a input file element
 		if (!(input_element.tagName == 'INPUT' && input_element.type == 'file')) {
 			alert("MultiUpload: Error! not a file input element!");
 			return null; 
 		}
-		if (!$defined(form)) {
-			alert("You need to specify a form!");
+		if (!$defined(upload_iframe)) {
+			alert("You need to specify an upload iframe!");
 			return null;
 		}
 		if ($defined(file_ext)) {
 			this.file_ext = file_ext;
 		}
-		this.form = form;
+		this.upload_iframe = upload_iframe;
 		this.name = input_element.name;
 		this.elements = []; // list of elements
 		this.lastid = 0; // last id
-		this.needs_cleanup = false; // tells if this.list needs to be cleaned
+		this.needs_cleanup = false; // needs_cleanup executed, things need cleanup
 		
 		$(input_element); // add element methods
 		this.initializeElement (input_element);
@@ -32,17 +32,6 @@ var MultiUpload = new Class({
 				'class': 'multiupload'
 			}
 		);
-		// the input that holds the result of the upload
-		this.upload_results = new Element(
-			'input', {
-				'class': 'hidden',
-				'id': 'upload_results'
-			}
-		);
-		// atach a function to the input
-		this.upload_results.update = function() {
-			this.uploadResponse();
-		}.bind(this);
 		// list of file names
 		this.list = new Element(
 			'div', {
@@ -173,18 +162,20 @@ var MultiUpload = new Class({
 			item.remove();
 		});
 		this.list.setHTML("<img src='img/loading_04.gif'/><span>Uploading...</span>");
-		this.needs_cleanup = true;
-		this.fireEvent('onStart');
+		// handle iframe's onload event
+		this.upload_iframe.addEvent('load', this.uploadResponse.bind(this));
 		// Opera hack
-		$('upload_form').submit();
+		$('upload_form').submit(); 
+		this.fireEvent('onStart');
+		this.needs_cleanup = true;
 	},
 	/* Fired when we get the results for the upload */
 	uploadResponse: function() {
 		this.last_input.disabled = false;
 		this.submit.disabled = false;
-		this.list.setHTML(this.upload_results.msg);
+		this.upload_iframe.removeEvents();
 		// fire the event
-		this.fireEvent('onResponse', this.upload_results.files); 
+		this.fireEvent('onResponse');
 	},
 	/* Set new file extension for the upload files */
 	setFileExtensions: function(file_ext) {
