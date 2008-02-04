@@ -98,8 +98,11 @@ function folderLoad (reponseText, responseXML)
 function uploadStart()
 {
 	can_change = false;
+	$('uploadMsg').setStyle('display', 'block');
+	$('uploadMsg').setHTML("<img src='img/loading_04.gif'/><span>Uploading...</span>");
 }
 
+// TODO: handle error cases
 function uploadResponse()
 {
 	can_change = true;
@@ -108,12 +111,22 @@ function uploadResponse()
 	var files = doc.upload_files;
 	// write the message
 	if($defined(msg)) {
-		$('upload_msg').setHTML(msg);
+		$('uploadMsg').setHTML(msg);
+		$('uploadMsg').setStyle('display', 'block');
+	} else {
+		alert('Fatal error!');
+		return;
 	}
 	// add the files
 	$each(files, function(file){
 		addFile(file);
 	});
+}
+
+function uploadNewSession()
+{
+	$('uploadMsg').setStyle('display', 'none');
+	$('uploadMsg').setHTML('');
 }
 
 // mousedown pt. un fisier
@@ -293,7 +306,8 @@ function init ()
 	);
 	multiUpload.addEvents({
 		'onStart': uploadStart,
-		'onResponse': uploadResponse
+		'onResponse': uploadResponse,
+		'onNewSession': uploadNewSession
 	});
 }
 

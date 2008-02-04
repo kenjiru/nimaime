@@ -75,9 +75,9 @@ if(count($upload_errors) == 0) {
 	$upload_msg = "Success: all the files uploaded successfully!";
 } else {
 	if(count($upload_moved) == 0)
-		$upload_msg = "Fatal: no files could be upload! <br/>";
+		$upload_msg = "Error: no files could be upload! <br/>";
 	else 
-		$upload_msg = "Attention: some files could not be uploaded: <br/>";
+		$upload_msg = "Error: some files could not be uploaded: <br/>";
 	// list the files not uploaded
 	foreach($upload_errors as $error) {
 		$upload_msg .= "'". $error[0]. "' reason: ". $error[1]. "<br/>";

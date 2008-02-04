@@ -2,9 +2,7 @@
 
 .multiupload{
 	width: auto;
-	border: 1px outset gray;
-	padding: 4px;
-	background: #eee;
+	padding: 0px;
 }
 .multiupload .file{
 	float: left;
@@ -13,10 +11,9 @@
 	float: right;
 }
 .multiupload .list{
-	margin-top: 28px;
-	border:1px solid #ccc;
-	background: #fff;
-/*	clear:both;*/
+	margin-top: 34px;
+	border: 1px solid #ccc;
+	clear: both;
 }
 .multiupload .list .ext{
 	margin: 1px;
@@ -31,12 +28,8 @@
 }
 .multiupload .list .item{
 	margin:1px;
-	background: #eee;
+/*	background: #eee;*/
 }
 .multiupload .list .item:hover{
 	background: #ccc;
-}
-
-.hidden {
-	display: none;
 }

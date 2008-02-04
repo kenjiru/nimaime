@@ -49,7 +49,7 @@
 			<form id="upload_form" method="post" enctype="multipart/form-data" target="upload_iframe" action="result.html">
 				<input type="file" name="upload_files[]"/>
 			</form>
-			<div id="upload_msg"></div>
+			<div id="uploadMsg"></div>
 			<iframe name="upload_iframe" id="upload_iframe" class="hidden"></iframe>
 		</div>
 	</div>

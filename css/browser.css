@@ -1,8 +1,5 @@
 @CHARSET "UTF-8";
-/*
- * TODO:
- * - sa testez selctorul :hover pt. folderList
- */
+
 body {
 	height: 100%; 
 	margin: 0;
@@ -18,10 +15,7 @@ body {
 	height: 1px;
 }
 
-/*
- * leftPanel
- */
-/* Trebuie sa aiba o dimensiune mai mica decat cea mai mare coloana nefloat */
+/* leftPanel */
 #leftPanel {
 	float: left;
 	left: 0px; 
@@ -46,17 +40,13 @@ body {
 	list-style-type: none;
 }
 
-/*
- * rightContainer
- */
-  #rightContainer {
+/* rightContainer */
+#rightContainer {
  	float:left;
  	margin-left: 2px;
- }
+}
 
-/*
- * rightPanel
- */
+/* rightPanel */
 #rightPanel {
 	height: auto;
 	width: 600px;
@@ -79,9 +69,7 @@ body {
 	list-style-type: none;
 }
 
-/*
- * optionsPanel
- */
+/* optionsPanel */
  #optionsPanel {
 	height: auto;
 	width: 600px;
@@ -103,12 +91,17 @@ body {
 #uploadForm, #detailsForm {
 	display: none;
 	margin-top: 4px;
+	padding: 4px;
 	border: 1px solid #ccc;
 }
+#uploadForm #uploadMsg {
+	border: 1px solid #ccc;
+	padding: 2px;
+	margin-top: 2px;
+	display: none;
+}
 
-/*
- * leftPanel - lista de directoare
- */
+/* leftPanel - lista de directoare */
 #folderList li {
 	z-index: -1;
 	height: 24px;

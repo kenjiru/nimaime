@@ -1,7 +1,8 @@
 var MultiUpload = new Class({
 	options: {
 		onStart: Class.empty,
-		onResponse: Class.empty
+		onResponse: Class.empty,
+		onNewSession: Class.empty,
 	},
 	/* Class constructor */
 	initialize: function(upload_iframe, input_element, file_ext) {
@@ -87,6 +88,7 @@ var MultiUpload = new Class({
 		}
 		// clean the file list if needed
 		if (this.needs_cleanup) {
+			this.fireEvent('onNewSession');
 			this.reset();
 		}
 		// the id of the new element
@@ -161,7 +163,6 @@ var MultiUpload = new Class({
 		items.each(function(item) {
 			item.remove();
 		});
-		this.list.setHTML("<img src='img/loading_04.gif'/><span>Uploading...</span>");
 		// handle iframe's onload event
 		this.upload_iframe.addEvent('load', this.uploadResponse.bind(this));
 		// Opera hack
