@@ -1,8 +1,9 @@
 Major bugs
 ==========
 Drag and drop related:
-- when the fileList is scrolled
-- when you drag and drop slowly
+- scrolling the file list couses drag and drop to handle incorectly images
+* moving the mouse cursor slowly while dragging can create a trash clone of 
+  the file
 
 Uploading related:
-- when I get an error, the page is stalled
+- when I get an error, timeout, ecc. the page stalls

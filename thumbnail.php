@@ -74,7 +74,7 @@ if ($file_ext === ".jpg") {
 	for($i = 0; $i < $maxLines; $i++) {
 	    $line = (strlen($lines[$i]) > $maxCharsPerLine) ? substr($lines[$i], 0, $maxCharsPerLine) : $lines[$i];
 //	    $line = ereg_replace("\t", "  ", $line);
-	    $line = ereg_replace("[\r \n \t]", "", $line); 
+	    $line = ereg_replace("[\r \n \t]", " ", $line); 
 	    imagestring($image, $font, 3, ($i * $lineHeight), $line, $black);
 	}
 	// output the image

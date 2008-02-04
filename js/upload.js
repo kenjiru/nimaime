@@ -4,18 +4,25 @@ var MultiUpload = new Class({
 		onResponse: Class.empty
 	},
 	/* Class constructor */
-	initialize: function(input_element, file_ext) {
+	initialize: function(form, input_element, file_ext) {
 		// check if it's a input file element
 		if (!(input_element.tagName == 'INPUT' && input_element.type == 'file')) {
-			alert("MultiUpload: Error! not a file input element!"); 
+			alert("MultiUpload: Error! not a file input element!");
+			return null; 
+		}
+		if (!$defined(form)) {
+			alert("You need to specify a form!");
+			return null;
 		}
 		if ($defined(file_ext)) {
 			this.file_ext = file_ext;
 		}
+		this.form = form;
 		this.name = input_element.name;
 		this.elements = []; // list of elements
 		this.lastid = 0; // last id
 		this.needs_cleanup = false; // tells if this.list needs to be cleaned
+		
 		$(input_element); // add element methods
 		this.initializeElement (input_element);
 		
@@ -51,7 +58,7 @@ var MultiUpload = new Class({
 				'events': {
 					'click': function() {
 						this.uploadStart();
-//						return false;
+						return false;
 					}.bind(this)
 				}
 			}
@@ -168,6 +175,8 @@ var MultiUpload = new Class({
 		this.list.setHTML("<img src='img/loading_04.gif'/><span>Uploading...</span>");
 		this.needs_cleanup = true;
 		this.fireEvent('onStart');
+		// Opera hack
+		$('upload_form').submit();
 	},
 	/* Fired when we get the results for the upload */
 	uploadResponse: function() {

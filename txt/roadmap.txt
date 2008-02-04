@@ -18,6 +18,7 @@ Milestone 3:
 
 Milestone 4:
 - rename in place
+- preview for all files
 - add other image file support
 - upload with progress bars
 

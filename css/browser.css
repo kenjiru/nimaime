@@ -14,6 +14,12 @@ body {
 	font-size-adjust: none;
 }
 
+.hidden {
+	display: none;
+	visibility: hidden;
+	height: 1px;
+}
+
 /*
  * leftPanel
  */
@@ -138,7 +144,7 @@ body {
 	background: url("../img/folder.png") left center no-repeat;
 }
 
-#folderList .folder-hover {
+#folderList .folder:hover {
 	background: url("../img/folder-hover.png") left center no-repeat;
 }
 #folderList .folder-open {
