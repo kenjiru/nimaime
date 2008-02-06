@@ -166,11 +166,12 @@ function fileDragCheck (ev)
 		var drop = $('trashFolder');
 		// calculate the position
 		var coord = file_dragged.getCoordinates();
-		coord.top -= $('fileList').scrollTop;
+		var scroll = $('fileList').getScroll();
+		if(!window.opera)
+			coord.top -= scroll.y;
 		// clonez elementul	 
 		var file_clone = file_dragged.clone()
 			.setStyles({'opacity': 0.7, 'position': 'absolute'})
-			.setStyles({'top':file_dragged.getTop(), 'left':file_dragged.getLeft()})
 			.setStyles(coord) 
 			.addClass('offset')
 			.addEvent('emptydrop', function() {
@@ -281,17 +282,6 @@ function init ()
 				if (folder.className != "trash")
 					folderClick (this);
 			},
-/*			'mouseover' : function () {
-				folderMouseover (this);
-			},
-			'mouseout' : function () {
-				folderMouseout (this);
-			},
-			// drag & drop
-			'over' : function () {
-				folderMouseover (this);
-			},
-*/
 			// urm. 2 ev. fac el. non-selectabil in IE
 			'selectstart' : function () {
 				return false;
