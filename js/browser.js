@@ -162,13 +162,16 @@ function fileDragCheck (ev)
 	if (distance > 4) {
 		ev = new Event(ev).stop();
 		file_dragged.removeEvent('mousemove', fileDragCheck);
-
+		// drop object
 		var drop = $('trashFolder');
-		
+		// calculate the position
+		var coord = file_dragged.getCoordinates();
+		coord.top -= $('fileList').scrollTop;
 		// clonez elementul	 
 		var file_clone = file_dragged.clone()
 			.setStyles({'opacity': 0.7, 'position': 'absolute'})
-			.setStyles(file_dragged.getCoordinates()) 
+			.setStyles({'top':file_dragged.getTop(), 'left':file_dragged.getLeft()})
+			.setStyles(coord) 
 			.addClass('offset')
 			.addEvent('emptydrop', function() {
 				this.remove();

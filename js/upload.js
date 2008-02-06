@@ -2,7 +2,7 @@ var MultiUpload = new Class({
 	options: {
 		onStart: Class.empty,
 		onResponse: Class.empty,
-		onNewSession: Class.empty,
+		onNewSession: Class.empty
 	},
 	/* Class constructor */
 	initialize: function(upload_iframe, input_element, file_ext) {
@@ -158,17 +158,19 @@ var MultiUpload = new Class({
 	uploadStart: function() {
 		this.last_input.disabled = true;
 		this.submit.disabled = true;
+		this.needs_cleanup = true;
 		// clear the files list
+/*
 		var items = this.list.getChildren();
 		items.each(function(item) {
 			item.remove();
 		});
+*/
 		// handle iframe's onload event
 		this.upload_iframe.addEvent('load', this.uploadResponse.bind(this));
 		// Opera hack
 		$('upload_form').submit(); 
 		this.fireEvent('onStart');
-		this.needs_cleanup = true;
 	},
 	/* Fired when we get the results for the upload */
 	uploadResponse: function() {
@@ -188,6 +190,9 @@ var MultiUpload = new Class({
 		$each(this.elements, function(element) {
 			if ($defined(element.file)) {
 				element.file.remove();
+			}
+			if ($defined(element.item)) {
+				element.item.remove();
 			}
 		});
 		// clears the list

@@ -71,7 +71,7 @@ body {
 
 /* optionsPanel */
  #optionsPanel {
-	height: auto;
+/*	height: auto;*/
 	width: 600px;
 	margin-top: 4px;
 	padding: 4px;

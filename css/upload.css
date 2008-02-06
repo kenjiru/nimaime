@@ -1,5 +1,11 @@
 @CHARSET "UTF-8";
 
+/* fix for IE */
+#upload_form {
+	padding: 0px;
+	margin: 0px;
+}
+
 .multiupload{
 	width: auto;
 	padding: 0px;
@@ -11,7 +17,7 @@
 	float: right;
 }
 .multiupload .list{
-	margin-top: 34px;
+/*	margin-top: 34px;*/
 	border: 1px solid #ccc;
 	clear: both;
 }
