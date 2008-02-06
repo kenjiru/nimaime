@@ -1,9 +1,13 @@
 Major bugs
 ==========
 Drag and drop related:
-- scrolling the file list couses drag and drop to handle incorectly images
+* scrolling the file list couses drag and drop to handle incorectly images
 * moving the mouse cursor slowly while dragging can create a trash clone of 
   the file
 
 Uploading related:
-- when I get an error, timeout, ecc. the page stalls
+* when there is an error the application stalls
+- when timeout occurs application stalls (use statechanged)
+
+Design:
+* extra padding for the form element in IE

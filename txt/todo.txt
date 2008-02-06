@@ -3,9 +3,10 @@ PHP:
 - authentication
 
 Application:
-- preload application images
+- preload images for application
 - error handling for Ajax actions (onFailed, etc..)
 
 Upload:
-- show custom image for different file type
-- check for double files
+* generate thumbnails for uploaded files (images, text)
+- client side check for double files
+- different icons for different file types 

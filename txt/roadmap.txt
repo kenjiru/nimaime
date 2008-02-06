@@ -10,7 +10,7 @@ Milestone 1:
 
 Milestone 2:
 - file upload support
-- delete files by dragging and dropping them in the recile bin
+- delete files by dragging and dropping them in the recycle bin
 
 Milestone 3:
 - generate XML files
@@ -18,7 +18,7 @@ Milestone 3:
 
 Milestone 4:
 - rename in place
-- preview for all files
+- preview files
 - add other image file support
 - upload with progress bars
 
