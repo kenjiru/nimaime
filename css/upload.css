@@ -5,7 +5,6 @@
 	padding: 0px;
 	margin: 0px;
 }
-
 .multiupload{
 	width: auto;
 	padding: 0px;
@@ -16,26 +15,32 @@
 .multiupload .submit{
 	float: right;
 }
-.multiupload .list{
-/*	margin-top: 34px;*/
+.multiupload ul{
 	border: 1px solid #ccc;
 	clear: both;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
 }
-.multiupload .list .ext{
+.multiupload ul li{
+	height: 18px;
 	margin: 1px;
-	float: left;
-	margin-top: 4px;
+	padding-left: 20px;
 }
-.multiupload .list .delete{
+.multiupload ul li.image{
+	background: url("../img/tango-image.png") left center no-repeat;
+}
+.multiupload ul li.text{
+	background: url("../img/tango-text.png") left center no-repeat;
+}
+.multiupload ul li.video{
+	background: url("../img/tango-video.png") left center no-repeat;
+}
+.multiupload ul li:hover{
+	background-color: #ccc;
+}
+.multiupload ul li .delete{
 	margin: 1px;
 	float: right;
-	margin-top: 4px;
-	cursor:pointer;
-}
-.multiupload .list .item{
-	margin:1px;
-/*	background: #eee;*/
-}
-.multiupload .list .item:hover{
-	background: #ccc;
+	cursor: pointer;
 }

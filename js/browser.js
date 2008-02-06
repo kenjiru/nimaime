@@ -114,7 +114,7 @@ function uploadResponse()
 		$('uploadMsg').setHTML(msg);
 		$('uploadMsg').setStyle('display', 'block');
 	} else {
-		alert('Fatal error!');
+		$('uploadMsg').setHTML('Fatal error!');
 		return;
 	}
 	// add the files
@@ -305,7 +305,7 @@ function init ()
 	multiUpload = new MultiUpload(
 		$('upload_iframe'),
 		$('upload_form').getElementsByTagName('input')[0], 
-		"(\.jpg)|(\.png)"
+		".jpg .png"
 	);
 	multiUpload.addEvents({
 		'onStart': uploadStart,

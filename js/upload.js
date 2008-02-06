@@ -34,11 +34,7 @@ var MultiUpload = new Class({
 			}
 		);
 		// list of file names
-		this.list = new Element(
-			'div', {
-				'class':'list'
-			}
-		);
+		this.list = new Element('ul');
 		// the submit button
 		this.submit = new Element(
 			'input', {
@@ -82,7 +78,8 @@ var MultiUpload = new Class({
 			name = name.substring(name.lastIndexOf('/') + 1);
 		}
 		// check the extension
-		if (name.search(this.file_ext) == -1) {
+		var ext = name.substring(name.lastIndexOf('.')+1);
+		if (this.file_ext.search(ext) == -1) {
 			alert ("Invalid file type, you have to choose a " + this.file_ext + " file");
 			return;
 		}
@@ -94,43 +91,43 @@ var MultiUpload = new Class({
 		// the id of the new element
 		var id = this.lastid;
 		var span = new Element('span').setText( name );
-		var img_ext = new Element(
-			'img', {
-				'src':'img/cross_small.gif',
-				'class':'ext',
-				'alt':'Delete',
-				'title':'Delete',
-				'events':{
-					'click':function(){
-						this.deleteElement (id);
-					}.bind(this)
-				}
-			}
-		);
 		var img_delete = new Element(
 			'img', {
-				'src':'img/cross_small.gif',
-				'class':'delete',
-				'alt':'Delete',
-				'title':'Delete',
-				'events':{
-					'click':function(){
+				'src': 'img/tango-remove.png',
+				'class': 'delete',
+				'alt': 'Delete',
+				'title': 'Delete',
+				'events': {
+					'click': function(){
 						this.deleteElement (id);
 					}.bind(this)
 				}
 			}
 		);
-		var row = new Element(
-			'div', {
-				'class':'item'
-			}
-		).adopt(img_delete).adopt(img_ext).adopt(span);
+		// determine the icon for the file
+		var ext_class = '';
+		switch(ext) {
+			case 'jpg':
+				ext_class = 'image';
+				break;
+			case 'txt':
+				ext_class = 'text';
+				break;
+			case 'flv':
+				ext_class = 'video';
+				break;
+		}
+		var li = new Element('li',
+			{
+				'class': ext_class
+			});
+		li.adopt(img_delete).adopt(span);
 		
-		this.list.adopt(row);
+		this.list.adopt(li);
 		
 		this.elements[this.lastid] = {
 			'file': element,
-			'item': row
+			'item': li
 		};
 		
 		// Create new file input element
@@ -177,6 +174,7 @@ var MultiUpload = new Class({
 		this.last_input.disabled = false;
 		this.submit.disabled = false;
 		this.upload_iframe.removeEvents();
+		this.reset();
 		// fire the event
 		this.fireEvent('onResponse');
 	},
@@ -195,8 +193,6 @@ var MultiUpload = new Class({
 				element.item.remove();
 			}
 		});
-		// clears the list
-		this.list.setHTML('');
 		// resets all the variables
 		this.elements = []; 
 		this.lastid = 0; 
