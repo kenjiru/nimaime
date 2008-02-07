@@ -43,6 +43,7 @@
 		<div id="optionsMenu">
 			<ul>
 				<li id="uploadButton">Upload</li>
+				<li id="detailsButton">Details</li>
 			</ul>
 		</div>
 		<div id="uploadForm">
@@ -52,8 +53,19 @@
 			<div id="uploadMsg"></div>
 			<iframe name="upload_iframe" id="upload_iframe" class="hidden"></iframe>
 		</div>
+		<div id="detailsForm">
+			<table>
+				<tr>
+					<td>File name</td>
+					<td><input id="fileName"/></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><textarea id="fileDescription"></textarea></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-
  </div>
 </body>
 </html>
