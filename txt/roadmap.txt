@@ -21,6 +21,7 @@ Milestone 4:
 - preview files
 - add other image file support
 - upload with progress bars
+- change file input button
 
 Idei upload:
 - selectez fisiere multiple si le adaug intr-o lista

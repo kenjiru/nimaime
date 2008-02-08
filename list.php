@@ -29,5 +29,5 @@ while (false !== ($file = readdir ($dir_h))) {
 	}
 }
 
-include("templates/list.tpl");
+include("templates/list.tpl.php");
 ?>

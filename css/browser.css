@@ -88,6 +88,11 @@ body {
 	padding: 0;
 	cursor: pointer;
 }
+#optionsMenu li {
+	padding-right: 4px;
+}
+
+/* uploadForm - the form responsible for upload */
 #uploadForm, #detailsForm {
 	display: none;
 	margin-top: 4px;
@@ -101,7 +106,19 @@ body {
 	display: none;
 }
 
-/* leftPanel - lista de directoare */
+/* detailsForm - the form where the user can edit the details */
+#detailsForm table td {
+	vertical-align: top;
+	padding-right: 4px;
+}
+#detailsForm #fileNameNew, #detailsForm #fileDescription {
+	width: 260px;
+}
+#detailsForm #fileDescription {
+	height: 3em;
+}
+
+/* leftPanel - folder list */
 #folderList li {
 	z-index: -1;
 	height: 24px;

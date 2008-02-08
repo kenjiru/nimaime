@@ -1,6 +1,7 @@
 PHP:
 - escape all GET variables
 - authentication
+- image and text thumbnails caching
 
 Application:
 - preload images for application

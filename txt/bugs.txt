@@ -4,6 +4,7 @@ Drag and drop related:
 * scrolling the file list couses drag and drop to handle incorectly images
 * moving the mouse cursor slowly while dragging can create a trash clone of 
   the file
+* moving scrolled files in Opera
 
 Uploading related:
 * when there is an error the application stalls

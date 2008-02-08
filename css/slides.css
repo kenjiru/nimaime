@@ -2,9 +2,7 @@
 
 #fileList .file {
 	float: left;
-/*	width: 160px;*/
-/*	height: 160px;*/
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 	margin-right: 4px;
 	cursor: pointer;
 	overflow: hidden;
@@ -26,9 +24,8 @@
 #fileList .file .name {
 	width: 160px;
 	height: 1.2em;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #ccc;
+	border: 1px solid #ccc;
+	margin-top: 4px;
 	background-color: #eee;
 	text-align: center;
 	overflow: hidden;

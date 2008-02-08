@@ -57,7 +57,11 @@
 			<table>
 				<tr>
 					<td>File name</td>
-					<td><input id="fileName"/></td>
+					<td>
+						<input id="fileNameNew"/>
+						<input id="fileName" type="hidden"/>
+						<input id="fileExt" type="hidden"/>
+					</td>
 				</tr>
 				<tr>
 					<td>Description</td>

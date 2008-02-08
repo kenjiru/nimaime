@@ -106,6 +106,6 @@ foreach ($upload_moved as $file) {
 }
 $upload_json = substr($upload_json, 0, -1);
 
-include("templates/upload.tpl");
+include("templates/upload.tpl.php");
 
 ?>

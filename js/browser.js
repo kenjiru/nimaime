@@ -1,8 +1,3 @@
-/**
- * TODO:
- * - replace addClass() and removeClass() with className property 
- */
-
 // form-ul afisat
 var formShowed = null;
 // drag&drop - pozitia initiala
@@ -60,17 +55,18 @@ function folderLoad (reponseText, responseXML)
 	var folder_name = changed_folder.getText().trim();
 	// sets the action for the upload form
 	$('upload_form').action = 'upload.php?dir=' + folder_name;
-	// sets the file extensions for the upload form
+	// TODO: get the extension from the server
+	// determine the file extensions for the upload form
 	var ext = '';
 	switch (folder_name) {
 		case 'Images':
-			ext = '\.jpg';
+			ext = 'jpg';
 			break; 
 		case 'Movies':
-			ext = '\.flv';
+			ext = 'flv';
 			break;
 		case 'Text':
-			ext = '\.txt';
+			ext = 'txt';
 			break;
 	} 
 	multiUpload.setFileExtensions(ext);
@@ -88,9 +84,15 @@ function folderLoad (reponseText, responseXML)
 	
 	var files = $('fileList').getChildren();
 	files.each(function(file){
-		file.addEvent('mousedown', function(ev) {
-			fileMousedown (file, ev);
-			return false;
+		file.addEvents({
+			'mousedown': function(ev) {
+				fileMousedown (file, ev);
+				return false;
+			},
+			'click' : function(ev) {
+				fileClicked(file);
+				return false;
+			}
 		});
 	});
 }
@@ -129,48 +131,51 @@ function uploadNewSession()
 	$('uploadMsg').setHTML('');
 }
 
-// mousedown pt. un fisier
+function fileClicked(file)
+{
+	detailsFill(file);
+	return false;
+}
+
+/* mouse button was pressed on a file */
 function fileMousedown (file, ev)
 {
 	file_mousePos = ev.page;
-	file_dragged = file;
 
-	file_dragged.addEvents({
-		'mousemove' : fileDragCheck, 
-		'mouseup' : fileDragCancel
+	file.addEvents({
+		'mousemove' : function(ev) {
+			fileDragCheck(ev, file);
+			return false;
+		}, 
+		'mouseup' : function(){
+			file.removeEvents('mousemove');
+			file.removeEvent('mouseup');
+			return false;
+		}
 	});
-	file_dragged.removeEvent ('mousedown', fileMousedown);
+	file.removeEvent ('mousedown', fileMousedown);
 	
 	return false;
 }
 
-// cancels the drag event
-function fileDragCancel (ev)
-{
-	file_dragged.removeEvent('mousemove', fileDragCheck);
-	file_dragged.removeEvent('mouseup', fileDragCancel);
-	
-	return false;
-}
-
-// checks if we can start dragging
-function fileDragCheck (ev)
+/* checks if we can start dragging */
+function fileDragCheck (ev, file)
 {
 	var distance = Math.round(Math.sqrt(Math.pow(ev.page.x - file_mousePos.x, 2) 
 		+ Math.pow(ev.page.y - file_mousePos.y, 2)));
 	
 	if (distance > 4) {
 		ev = new Event(ev).stop();
-		file_dragged.removeEvent('mousemove', fileDragCheck);
+		file.removeEvents('mousemove');
 		// drop object
 		var drop = $('trashFolder');
 		// calculate the position
-		var coord = file_dragged.getCoordinates();
+		var coord = file.getCoordinates();
 		var scroll = $('fileList').getScroll();
 		if(!window.opera)
 			coord.top -= scroll.y;
 		// clonez elementul	 
-		var file_clone = file_dragged.clone()
+		var file_clone = file.clone()
 			.setStyles({'opacity': 0.7, 'position': 'absolute'})
 			.setStyles(coord) 
 			.addClass('offset')
@@ -186,7 +191,7 @@ function fileDragCheck (ev)
 				drop.removeClass ('trash-full');
 				drop.addClass ('trash');
 				// call the user function
-				fileDragStop(file_dragged);
+				fileDragStop(file);
 			},
 			'over': function() {
 				drop.removeClass ('trash');
@@ -214,6 +219,7 @@ function fileDragCheck (ev)
 	return false;
 }
 
+/* When the files is dragged in the recycle bin */
 function fileDragStop(file)
 {
 	var file_name = file.getElementsByTagName('div')[1].getText();
@@ -256,8 +262,11 @@ function addFile (file)
 			'class': 'file',
 			'events': {
 				'mousedown' : function(ev) {
-					fileMousedown (li, ev);
+					fileMousedown(li, ev);
 					return false;
+				},
+				'click' : function(ev) {
+					fileClicked(li);
 				}
 			}
 		}
@@ -268,8 +277,30 @@ function addFile (file)
 	$('fileList').adopt(li);
 }
 
+function detailsFill(file)
+{
+	var img = file.getElementsByTagName('img')[0];
+	var name = img.getProperty('alt');
+	var desc = img.getProperty('desc');
+	var ext = name.substring(name.lastIndexOf('.')+1);
+	name = name.substring(0, name.lastIndexOf('.'));
+	
+	$('fileName').value = name;
+	$('fileNameNew').value = name;
+	$('fileExt').value = ext;
+	$('fileDescription').value = desc;
+}
+
+function detailsSave()
+{
+	
+}
+
 function init ()
 {
+	$('detailsButton').addEvent ('click', function () {
+		showForm ($('detailsForm'));
+	});
 	$('uploadButton').addEvent ('click', function () {
 		showForm ($('uploadForm'));
 	});
