@@ -150,19 +150,14 @@ var MultiUpload = new Class({
 	deleteElement: function(id) {
 		this.elements[id].file.remove();
 		this.elements[id].item.remove();
+		this.elements[id].file = null;
+		this.elements[id].item = null;
 	},
 	/* Starts the file uploading */
 	uploadStart: function() {
 		this.last_input.disabled = true;
 		this.submit.disabled = true;
 		this.needs_cleanup = true;
-		// clear the files list
-/*
-		var items = this.list.getChildren();
-		items.each(function(item) {
-			item.remove();
-		});
-*/
 		// handle iframe's onload event
 		this.upload_iframe.addEvent('load', this.uploadResponse.bind(this));
 		// Opera hack
