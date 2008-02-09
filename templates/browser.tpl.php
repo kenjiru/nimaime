@@ -54,6 +54,7 @@
 			<iframe name="upload_iframe" id="upload_iframe" class="hidden"></iframe>
 		</div>
 		<div id="detailsForm">
+			<form id="details_form" method="post">
 			<table>
 				<tr>
 					<td>File name</td>
@@ -65,9 +66,13 @@
 				</tr>
 				<tr>
 					<td>Description</td>
-					<td><textarea id="fileDescription"></textarea></td>
+					<td><textarea id="fileDesc"></textarea></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="Save" onclick="detailsSave()"/> </td>
 				</tr>
 			</table>
+			</form>
 		</div>
 	</div>
  </div>

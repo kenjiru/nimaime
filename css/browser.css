@@ -111,10 +111,10 @@ body {
 	vertical-align: top;
 	padding-right: 4px;
 }
-#detailsForm #fileNameNew, #detailsForm #fileDescription {
+#detailsForm #fileNameNew, #detailsForm #fileDesc {
 	width: 260px;
 }
-#detailsForm #fileDescription {
+#detailsForm #fileDesc {
 	height: 3em;
 }
 

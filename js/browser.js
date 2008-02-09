@@ -104,7 +104,7 @@ function uploadStart()
 	$('uploadMsg').setHTML("<img src='img/loading_04.gif'/><span>Uploading...</span>");
 }
 
-// TODO: handle error cases
+/* handle the response for the file upload */
 function uploadResponse()
 {
 	can_change = true;
@@ -283,18 +283,48 @@ function detailsFill(file)
 	var img = file.getElementsByTagName('img')[0];
 	var name = img.getProperty('alt');
 	var desc = img.getProperty('desc');
-	var ext = name.substring(name.lastIndexOf('.')+1);
+	var ext = name.substring(name.lastIndexOf('.'));
 	name = name.substring(0, name.lastIndexOf('.'));
 	
 	$('fileName').value = name;
 	$('fileNameNew').value = name;
 	$('fileExt').value = ext;
-	$('fileDescription').value = desc;
+	$('fileDesc').value = desc;
 }
 
 function detailsSave()
 {
-	
+	var myRequest = new Request({
+		'url' : 'change.php', 
+		'method': 'post',
+		'onSuccess' : function(reponseText, responseXML) {
+			var result = eval(reponseText);
+			var folder_name = $(current_folder).getText();
+			// ignore the response the current folder changed
+			if(folder_name != result.dir) return;
+			// update the file
+			var files = $('fileList').getChildren();
+			files.each(function(file){
+				var div_name = file.getElementsByTagName('div')[1];
+				if(div_name.getText() == result.file_name) {
+					var img = file.getElementsByTagName('img')[0];
+					div_name.setText(result.file_name_new);
+					img.setProperty('alt', result.file_name_new);
+					img.setProperty('desc', result.desc);
+				}
+			});
+		}
+	});
+	// contruct the data
+	var data = {
+		'dir': $(current_folder).getText(),
+		'file_name': $('fileName').value,
+		'file_name_new': $('fileNameNew').value,
+		'file_ext': $('fileExt').value,
+		'file_desc': $('fileDesc').value
+	};
+	// send the data
+	myRequest.post(data);
 }
 
 function init ()

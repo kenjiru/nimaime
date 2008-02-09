@@ -2,7 +2,6 @@
 require_once ("includes/config.inc.php");
 require_once ("includes/thumbnail.inc.php");
 
-$dir = null;
 if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
 else
@@ -46,7 +45,7 @@ while (false !== ($file = readdir ($dir_h))) {
 		if(!in_array($file, $xml_file_names)) {
 			$file_entry = $xml->addChild('file');
 			$file_entry->addChild('name', $file);
-			$file_entry->addChild('description', 'empty');
+			$file_entry->addChild('description', '');
 		}
 	}
 }
@@ -55,7 +54,7 @@ while (false !== ($file = readdir ($dir_h))) {
 $files_arr = array();
 foreach($xml->file as $file) {
 	$new_file['name'] = $file->name;
-	$new_file['description'] = $file->description;
+	$new_file['desc'] = $file->description;
 	// determine the thumbnail image
 	$ext = substr($file->name, strrpos($file->name, '.'));
 	if ($ext === ".jpg" || $ext === ".txt")

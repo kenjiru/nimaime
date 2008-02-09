@@ -9,7 +9,6 @@ define("UPLOAD_FILE_EXISTS", "same file exists");
 
 // TODO: check if the user is logged in
 
-$dir = null;
 if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
 else
@@ -90,7 +89,7 @@ for($i=0; $i< count($upload_files["name"]);$i++) {
 	// add entries to the xml file
 	$file_entry = $xml->addChild('file');
 	$file_entry->addChild('name', $file_name);
-	$file_entry->addChild('description', 'empty');
+	$file_entry->addChild('description', '');
 }
 
 // compute the upload message

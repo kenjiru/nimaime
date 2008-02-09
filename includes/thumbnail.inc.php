@@ -11,13 +11,14 @@ function create_thumbnail($dir, $file)
 	if (!isset($file))
 		die('dile variable not specified');
 	
+	$file_ext = strtolower(strrchr($file,"."));
+	$file_name = substr($file, 0, strrpos($file,'.'));
 	$file_path = $dir. $file;
 	$file_path_thumbnail = $dir. "thumbnails/". $file;
 	
 	if (false === fopen($file_path, 'r'))
 		die('could not open file');
 	
-	$file_ext = strtolower(strrchr($file,"."));
 	if ($file_ext === ".jpg") {
 		// create thumbnail for image file
 		list($image_width, $image_height) = getimagesize($file_path);

@@ -2,17 +2,11 @@
 // TODO: output JSON code for error messages
 require_once ("includes/config.inc.php");
 
-$dir = null;
-if (isset($_GET['dir']))
+if (isset($_GET['dir'], $_GET['file'])) {
 	$dir = $_GET['dir'];
-else
-	die('dir variable not specified');
-
-$file = null;
-if (isset($_GET['file']))
 	$file = $_GET['file'];
-else
-	die('file variable not specified');
+} else
+	die('dir or file variable not specified');
 
 $dir = $root_dir. $dir. "/";
 $dir_thumbnails = $dir. "thumbnails/";
@@ -25,8 +19,8 @@ if (fopen($dir. $file, 'w'))
 else
 	die('could not open file');
 
-if (is_file($dir_thumbnails. $file))
-	unlink($dir_thumbnails. $file);
+if (is_file($dir_thumbnails. $file. ".jpg"))
+	unlink($dir_thumbnails. $file. ".jpg");
 
 // remove the entry from the xml file
 $xml_file = $dir. "contents.xml";
