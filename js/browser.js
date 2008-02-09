@@ -249,7 +249,8 @@ function addFile (file)
 		'img', {
 			'src': file.src,
 			'alt': file.name,
-			'title': file.src
+			'title': file.src,
+			'desc': ''
 		}
 	);
 	var name_div = new Element(

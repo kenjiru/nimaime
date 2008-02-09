@@ -1,5 +1,6 @@
 <?php
 require_once ("includes/config.inc.php");
+require_once ("includes/thumbnail.inc.php");
 
 define("UPLOAD_ERROR", "upload error (file too big)");
 define("UPLOAD_MOVE_ERROR", "could not move the file");
@@ -12,14 +13,30 @@ $dir = null;
 if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
 else
-	die ('dir variable not specified or not valid');
+	die('dir variable not specified');
 
-if (!is_dir($root_dir. $dir))
-	die('not a valid directory!');
+$dir_name = $dir;
+$dir = $root_dir. $dir. "/";
+$dir_thumbnails = $dir. "thumbnails/";
+
+if (false === is_dir($dir))
+	die('could not open directory');
+
+if (false === is_dir($dir_thumbnails))
+	if(false === mkdir($dir_thumbnails))
+		die('could not create thumbnails directory');
+
+// try to open the xml file
+$xml_file = $dir. "contents.xml";
+$xml = null;
+if (file_exists($xml_file))
+	$xml = simplexml_load_file($xml_file);
+else
+	$xml = simplexml_load_string("<folder></folder>");
 
 // determine the allowed extensions
 $expected_ext = "none";
-switch ($dir) {
+switch ($dir_name) {
 	case "Movies":
 		$expected_ext = ".flv";
 		break;
@@ -37,7 +54,7 @@ if (isset($_FILES["upload_files"]))
 else
 	die('No files specified!');
 
-// mutam fisierele, verificam daca au fost erori
+// move the files
 $upload_moved = array();
 $upload_errors = array();
 
@@ -56,17 +73,24 @@ for($i=0; $i< count($upload_files["name"]);$i++) {
 		continue;
 	}
 	// check if the file already exists
-	$file_path = $root_dir. $dir. "/". $file_name;
+	$file_path = $dir. $file_name;
 	if (is_file($file_path)) {
 		$upload_errors[] = array($file_name, UPLOAD_FILE_EXISTS);
 		continue;
 	}
 	// move the file
-	if (move_uploaded_file($upload_files["tmp_name"][$i], $file_path))
+	if (move_uploaded_file($upload_files["tmp_name"][$i], $file_path)) {
 		$upload_moved[] = $file_name;
-	else 
+	} else {
 		$upload_errors[] = array($file_name, UPLOAD_MOVE_ERROR);
-
+		continue;
+	}
+	// create thumbnails
+	create_thumbnail($dir, $file_name);
+	// add entries to the xml file
+	$file_entry = $xml->addChild('file');
+	$file_entry->addChild('name', $file_name);
+	$file_entry->addChild('description', 'empty');
 }
 
 // compute the upload message
@@ -90,22 +114,18 @@ $upload_json = "";
 foreach ($upload_moved as $file) {
 	// determine the thumbnail image
 	$src = "";
-	switch ($expected_ext) {
-		case ".flv":
-			$src = "img/movie.png";
-			break;
-		case ".txt":
-			$src = "thumbnail.php?dir=". $dir. "&file=". $file;
-			break;
-		case ".jpg":
-			$src = "thumbnail.php?dir=". $dir. "&file=". $file;
-			break;
-	}
+	$ext = substr($file, strrpos($file, '.'));
+	if ($ext === ".jpg" || $ext === ".txt")
+		$src = $dir_thumbnails. $file;
+	elseif ($ext === ".flv")
+		$src = "img/movie.png";
 
 	$upload_json .= "{'name': '". $file. "', 'src': '". $src. "'},";
 }
 $upload_json = substr($upload_json, 0, -1);
 
-include("templates/upload.tpl.php");
+// save the xml file
+$xml->asXML($xml_file);
 
+include("templates/upload.tpl.php");
 ?>

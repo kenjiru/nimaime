@@ -1,5 +1,6 @@
 PHP:
 - escape all GET variables
+- validate file names (check for forbidden characters)
 - authentication
 - image and text thumbnails caching
 

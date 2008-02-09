@@ -5,7 +5,7 @@ $ignore_dirs = array ('.', '..', 'upload');
 $child_dirs = array();
 
 if (false === ($dir_h = opendir($root_dir)))
-	die;
+	die('could not open directory');
 
 while (false !== ($dir = readdir ($dir_h))) {
 	if (array_search($dir, $ignore_dirs) === false &&
