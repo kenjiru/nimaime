@@ -69,7 +69,8 @@
 					<td><textarea id="fileDesc"></textarea></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="Save" onclick="detailsSave()"/> </td>
+					<td><input id="detailsSaveButton" type="button" value="Save" onclick="detailsSave()"/></td>
+					<td>&nbsp;</td>
 				</tr>
 			</table>
 			</form>

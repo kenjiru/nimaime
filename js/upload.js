@@ -88,6 +88,12 @@ var MultiUpload = new Class({
 			this.fireEvent('onNewSession');
 			this.reset();
 		}
+		// check if a file with the same name is already in list
+		for(i=0; i<this.elements.length; i++)
+			if($defined(this.elements[i].item) && this.elements[i].item.getText() == name) {
+				alert('A file with the same name is already in the upload queue!');
+				return false;
+			}
 		// the id of the new element
 		var id = this.lastid;
 		var span = new Element('span').setText( name );
@@ -129,7 +135,6 @@ var MultiUpload = new Class({
 			'file': element,
 			'item': li
 		};
-		
 		// Create new file input element
 		new_input = new Element (
 			'input', {
