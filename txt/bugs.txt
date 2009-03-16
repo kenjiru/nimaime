@@ -1,14 +1,20 @@
 Major bugs
 ==========
 Drag and drop related:
-* scrolling the file list couses drag and drop to handle incorectly images
+- clicking with the right mouse button on an image, selects the image for drag 
+  and drop 
+* scrolling the file list causes drag and drop to handle incorrectly images
 * moving the mouse cursor slowly while dragging can create a trash clone of 
   the file
 * moving scrolled files in Opera
 
 Uploading related:
-* when there is an error the application stalls
 - when timeout occurs application stalls (use statechanged)
+* when there is an error the application stalls
+
+Properties change:
+- IE doesn't accept getting and setting of new properties 
+  solution: use alt and title
 
 Design:
 * extra padding for the form element in IE
