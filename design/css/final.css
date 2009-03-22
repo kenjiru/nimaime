@@ -31,12 +31,13 @@ body {
 }
 
 #spacer {
-	height: 43px;
+	height: 56px;
 	width: 400px;
 	float: right;
 }
 
 #header ul {
+	margin: 0;
 	margin-left: 20px;
 	float: left;
 	list-style: none;
@@ -86,7 +87,6 @@ body {
 	overflow: auto;
 	padding: 4px;
 	margin: 0px;
-	margin-top: 4px;
 	list-style-type: none;
 }
 
@@ -102,8 +102,9 @@ body {
 
 /* optionsMenu - the menu for uploadForm and detailsForm */
 #optionsMenu {
-	height: 25px;
-	background: #ffffff;
+	height: 30px;
+/*	background: #C6D9E9;*/
+	background: #ccc;
 }
 #optionsMenu ul {
 	float: left;
@@ -120,8 +121,15 @@ body {
 	padding: 0 10px;
 	margin: 0;
 	line-height: 30px;
-	color: #ffffff;
-	background: #666666;
+	text-shadow: #c6d9e9 1px 1px 1px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: normal;
+	color: #555;
+}
+#optionsMenu ul li a.current {
+	color: #fff;
+	background: #666;
 	-moz-border-radius-topleft: 3px;
 	-khtml-border-top-left-radius: 3px;
 	-webkit-border-top-left-radius: 3px;
@@ -130,10 +138,6 @@ body {
 	-khtml-border-top-right-radius: 3px;
 	-webkit-border-top-right-radius: 3px;
 	border-top-right-radius: 3px;
-	text-shadow: #c6d9e9 1px 1px 1px;
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: normal;
 }
 #optionsMenu ul li a:hover {
 	color: #fff;
@@ -142,14 +146,9 @@ body {
 /* uploadForm - the form responsible for upload */
 #uploadForm {
 	float: left;
-	display: none;
+	display: block;
 	padding: 4px;
 	padding-top: 10px;
-}
-
-#uploadForm #uploadMsg {
-	padding: 2px;
-	margin-top: 2px;
 }
 
 /* detailsForm - the form where the user can edit the details */
@@ -181,8 +180,8 @@ body {
 /* trash bin */
 #trashbin {
 	float: right;
-	height: 128px;
-	width: 128px;
+	height: 96px;
+	width: 96px;
 	background: url(../img/gion-trash.png);
 }
 .trashbin:hover {
