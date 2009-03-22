@@ -23,18 +23,20 @@
 
 #fileList .file .name {
 	width: 160px;
-	height: 1.2em;
-	border: 1px solid #ccc;
+	height: 1.4em;
+/*	border: 1px solid #ccc;*/
 	margin-top: 4px;
-	background-color: #eee;
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 12px;
 	text-align: center;
 	overflow: hidden;
 }
-
+/*
 #fileList .file .name:hover {
 	background-color: #ffffcc;
 }
-
+*/
 #fileList .file .normal {
 	border: 1px solid #000;
 }

@@ -44,3 +44,8 @@
 	float: right;
 	cursor: pointer;
 }
+#upload_iframe {
+	display: none;
+	visibility: hidden;
+	height: 1px;
+}

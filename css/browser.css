@@ -9,11 +9,6 @@ body {
 	font-size: 12px;
 	font-size-adjust: none;
 }
-.hidden {
-	display: none;
-	visibility: hidden;
-	height: 1px;
-}
 
 /* leftPanel */
 #leftPanel {
