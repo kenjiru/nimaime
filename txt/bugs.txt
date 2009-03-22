@@ -6,15 +6,21 @@ Drag and drop related:
 * scrolling the file list causes drag and drop to handle incorrectly images
 * moving the mouse cursor slowly while dragging can create a trash clone of 
   the file
-* moving scrolled files in Opera
+* Opera: moving files while FileList is scrooled
 
 Uploading related:
-- when timeout occurs application stalls (use statechanged)
+- when timeout occurs application stalls 
+  solution: use statechanged
 * when there is an error the application stalls
 
 Properties change:
-- IE doesn't accept getting and setting of new properties 
+- IE: doesn't accept getting and setting of new properties; 
   solution: use alt and title
 
 Design:
-* extra padding for the form element in IE
+* IE: extra padding for the form element
+
+Improvements
+============
+Drag and drop related:
+- the dragging copy always offsets down and left 

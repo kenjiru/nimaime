@@ -219,7 +219,7 @@ function fileDragCheck (ev, file)
 	return false;
 }
 
-/* When the files is dragged in the recycle bin */
+/* When the file is dragged in the recycle bin */
 function fileDragStop(file)
 {
 	var file_name = file.getElementsByTagName('div')[1].getText();

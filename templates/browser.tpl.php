@@ -14,10 +14,6 @@
 	<script type="text/javascript" src="js/upload.js"></script>
 </head>
 
-<!-- TODO:
-- css: cand apas dublu click pe un elem. din "optionsMenu" nu-l selecteze. 
-- javascript: calcularea dim. pt. "folderList" -->
-
 <body>
 
 <div id="leftPanel">
