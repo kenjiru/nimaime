@@ -14,5 +14,5 @@ while (false !== ($dir = readdir ($dir_h))) {
 	}
 }
 
-require_once ("templates/browser.tpl.php");
+require_once ("templates/browser-v2.tpl.php");
 ?>
