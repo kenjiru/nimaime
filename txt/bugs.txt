@@ -24,3 +24,6 @@ Improvements
 ============
 Drag and drop related:
 - the dragging copy always offsets down and left 
+
+Upload related:
+- mask the file input with an image

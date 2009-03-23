@@ -14,17 +14,22 @@
 	width: auto;
 	padding: 0px;
 }
-.multiupload .file{
-	float: left;
+.multiupload .file {
+	right: 0;
+	top: 0;
 }
 .multiupload .submit{
-	float: right;
+	float: left;
 }
 .multiupload ul{
-	border: 1px solid #ccc;
+	min-height: 2em;
+	border: 1px solid #d6d6d6;
+	background: #e6e6e6;
+	color: black;
 	clear: both;
-	padding: 0px;
+	padding: 2px;
 	margin: 0px;
+	margin-bottom: 4px;
 	list-style-type: none;
 }
 .multiupload ul li{
@@ -40,9 +45,6 @@
 }
 .multiupload ul li.video{
 	background: url("../img/tango-video.png") left center no-repeat;
-}
-.multiupload ul li:hover{
-	background-color: #ccc;
 }
 .multiupload ul li .delete{
 	margin: 1px;

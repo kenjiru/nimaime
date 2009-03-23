@@ -49,11 +49,20 @@ var MultiUpload = new Class({
 				}
 			}
 		);
-		container.injectAfter(input_element);
-		container.adopt(this.upload_results);
-		container.adopt(input_element);
-		container.adopt(this.submit);
+/*		this.add_bt = new Element(
+			'input', {
+				'type':'button',
+				'value':'Add',
+				'class':'add_bt'
+			}
+		);
+*/
+		container.injectBefore(input_element);
 		container.adopt(this.list);
+		container.adopt(this.upload_results);
+		container.adopt(this.submit);
+		container.adopt(input_element);
+//		container.adopt(this.add_bt);
 	},
 	/* Initializes the file input */
 	initializeElement: function(element) {
