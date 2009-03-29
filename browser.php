@@ -7,10 +7,11 @@ $child_dirs = array();
 if (false === ($dir_h = opendir($root_dir)))
 	die('could not open directory');
 
-while (false !== ($dir = readdir ($dir_h))) {
-	if (array_search($dir, $ignore_dirs) === false &&
-		$dir[0] != "." && is_dir ($root_dir. $dir)) {
-		array_push ($child_dirs, $dir);
+while (false !== ($child_dir = readdir ($dir_h))) {
+	if (is_dir ($root_dir. $child_dir) &&
+		array_search($child_dir, $ignore_dirs) === false && $child_dir[0] != "." && 
+		array_key_exists($child_dir, $allowed_dirs)) {
+		array_push ($child_dirs, $child_dir);
 	}
 }
 

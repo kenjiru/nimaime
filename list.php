@@ -6,6 +6,10 @@ if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
 else
 	die('dir variable not specified');
+	
+// check if the directory is allowed
+if (false === array_key_exists($dir, $allowed_dirs))
+	die('the directory is not allowed');
 
 $dir = $root_dir. $dir. "/";
 $dir_thumbnails = $dir. "thumbnails/";
@@ -57,7 +61,9 @@ foreach($xml->file as $file) {
 	$new_file['desc'] = $file->description;
 	// determine the thumbnail image
 	$ext = substr($file->name, strrpos($file->name, '.'));
-	if ($ext === ".jpg" || $ext === ".txt")
+	$ext = strtolower($ext);
+	// TODO: create a list of supported thumbnail extensions
+	if ($ext === ".jpg" || $ext === ".jpeg" || $ext === ".png" || $ext === ".txt")
 		$new_file['img'] = $dir_thumbnails. $file->name;
 	elseif ($ext === ".flv")
 		$new_file['img'] = "img/movie.png";

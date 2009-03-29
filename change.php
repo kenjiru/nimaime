@@ -1,6 +1,7 @@
 <?php
 require_once ("includes/config.inc.php");
 
+// TODO: Security: escape the post variables
 if (isset($_POST['dir'], $_POST['file_name'], $_POST['file_name_new'], $_POST['file_ext'])) {
 	$dir = $_POST['dir'];
 	$file = $_POST['file_name'];

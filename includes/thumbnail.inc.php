@@ -19,7 +19,7 @@ function create_thumbnail($dir, $file)
 	if (false === fopen($file_path, 'r'))
 		die('could not open file');
 	
-	if ($file_ext === ".jpg") {
+	if ($file_ext === ".jpg" || $file_ext === ".jpeg") {
 		// create thumbnail for image file
 		list($image_width, $image_height) = getimagesize($file_path);
 		// calculate the proportions

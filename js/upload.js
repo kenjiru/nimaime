@@ -49,20 +49,11 @@ var MultiUpload = new Class({
 				}
 			}
 		);
-/*		this.add_bt = new Element(
-			'input', {
-				'type':'button',
-				'value':'Add',
-				'class':'add_bt'
-			}
-		);
-*/
 		container.injectBefore(input_element);
 		container.adopt(this.list);
 		container.adopt(this.upload_results);
 		container.adopt(this.submit);
 		container.adopt(input_element);
-//		container.adopt(this.add_bt);
 	},
 	/* Initializes the file input */
 	initializeElement: function(element) {
@@ -87,7 +78,8 @@ var MultiUpload = new Class({
 			name = name.substring(name.lastIndexOf('/') + 1);
 		}
 		// check the extension
-		var ext = name.substring(name.lastIndexOf('.')+1);
+		var ext = name.substring(name.lastIndexOf('.'));
+		ext = ext.toLowerCase(); 
 		if (this.file_ext.search(ext) == -1) {
 			alert ("Invalid file type, you have to choose a " + this.file_ext + " file");
 			return;
@@ -122,13 +114,15 @@ var MultiUpload = new Class({
 		// determine the icon for the file
 		var ext_class = '';
 		switch(ext) {
-			case 'jpg':
+			case '.png':
+			case '.jpeg':
+			case '.jpg':
 				ext_class = 'image';
 				break;
-			case 'txt':
+			case '.txt':
 				ext_class = 'text';
 				break;
-			case 'flv':
+			case '.flv':
 				ext_class = 'video';
 				break;
 		}

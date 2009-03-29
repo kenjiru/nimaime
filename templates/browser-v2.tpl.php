@@ -17,12 +17,12 @@
 <body>
 <div id="header">
 	<div class="wrapper">
-		<a id="logo" href="http://design2use.com">Design2Use.com</a>
+		<div id="logo">Design2Use.com</div>
 		<div id="spacer">&nbsp;</div>
 		<ul id="folderList">
-			<li><a href="#">Images</a></li>
-			<li><a href="#">Movies</a></li>
-			<li><a href="#">Text</a></li>
+			<? foreach ($child_dirs as $dir) { ?>
+				<li ext="<?= $allowed_dirs[$dir] ?>"><a href="#"><?= $dir ?></a></li>
+			<? } ?>
 		</ul>
 	</div>
 </div>

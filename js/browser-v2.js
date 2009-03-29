@@ -57,20 +57,8 @@ function folderLoad (reponseText, responseXML)
 	var folder_name = $(changed_folder).getText().trim();
 	// sets the action for the upload form
 	$('upload_form').action = 'upload.php?dir=' + folder_name;
-	// TODO: get the extension from the server
-	// determine the file extensions for the upload form
-	var ext = '';
-	switch (folder_name) {
-		case 'Images':
-			ext = 'jpg';
-			break; 
-		case 'Movies':
-			ext = 'flv';
-			break;
-		case 'Text':
-			ext = 'txt';
-			break;
-	} 
+	// set the file extensions for the upload form
+	var ext = $(changed_folder).get('ext').toLowerCase();
 	multiUpload.setFileExtensions(ext);
 	// check if we need to reset the upload form
 	multiUpload.checkReset();

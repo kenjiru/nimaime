@@ -7,13 +7,15 @@ define("UPLOAD_MOVE_ERROR", "could not move the file");
 define("UPLOAD_WRONG_EXTENSION", "wrong extension");
 define("UPLOAD_FILE_EXISTS", "same file exists");
 
-// TODO: check if the user is logged in
-
 if (isset($_GET['dir']))
 	$dir = $_GET['dir'];
 else
 	die('dir variable not specified');
 
+// check if the directory is allowed
+if (false === array_key_exists($dir, $allowed_dirs))
+	die('the directory is not allowed');
+	
 $dir_name = $dir;
 $dir = $root_dir. $dir. "/";
 $dir_thumbnails = $dir. "thumbnails/";
@@ -33,20 +35,6 @@ if (file_exists($xml_file))
 else
 	$xml = simplexml_load_string("<folder></folder>");
 
-// determine the allowed extensions
-$expected_ext = "none";
-switch ($dir_name) {
-	case "Movies":
-		$expected_ext = ".flv";
-		break;
-	case "Text":
-		$expected_ext = ".txt";
-		break;
-	case "Images":
-		$expected_ext = ".jpg";
-		break;
-}
-
 $upload_files = null;
 if (isset($_FILES["upload_files"]))
 	$upload_files = $_FILES["upload_files"];
@@ -64,10 +52,12 @@ for($i=0; $i< count($upload_files["name"]);$i++) {
 		$upload_errors[] = array($file_name, UPLOAD_ERROR); 
 		continue;
 	}
-	// check for the extension
+	// check if the extension is allowed for the folder
 	$file_name = $upload_files["name"][$i]; 
 	$file_ext = strtolower(strrchr($file_name,"."));
-	if ($file_ext !== $expected_ext) {
+	// create an array with the allowed extensions for the upload folder
+	$dir_allowed_exts = preg_split('/ /', $allowed_dirs[$dir_name]);
+	if (false === in_array($file_ext, $dir_allowed_exts)) {
 		$upload_errors[] = array($file_name, UPLOAD_WRONG_EXTENSION);
 		continue;
 	}
@@ -84,7 +74,7 @@ for($i=0; $i< count($upload_files["name"]);$i++) {
 		$upload_errors[] = array($file_name, UPLOAD_MOVE_ERROR);
 		continue;
 	}
-	// create thumbnails
+	// create thumbnail
 	create_thumbnail($dir, $file_name);
 	// add entries to the xml file
 	$file_entry = $xml->addChild('file');
@@ -114,7 +104,8 @@ foreach ($upload_moved as $file) {
 	// determine the thumbnail image
 	$src = "";
 	$ext = substr($file, strrpos($file, '.'));
-	if ($ext === ".jpg" || $ext === ".txt")
+	$ext = strtolower($ext);
+	if ($ext === ".jpg" || $ext === ".jpeg" || $ext === ".png" || $ext === ".txt")
 		$src = $dir_thumbnails. $file;
 	elseif ($ext === ".flv")
 		$src = "img/movie.png";

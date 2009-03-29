@@ -1,6 +1,6 @@
 Major bugs
 ==========
-Drag and drop related:
+Drag and drop:
 - clicking with the right mouse button on an image, selects the image for drag 
   and drop 
 * scrolling the file list causes drag and drop to handle incorrectly images
@@ -8,10 +8,15 @@ Drag and drop related:
   the file
 * Opera: moving files while FileList is scrooled
 
-Uploading related:
+Uploading:
+- client side: extensions check to be case unsensitive
+- client side: check if any files selected for upload before submiting
 - when timeout occurs application stalls 
   solution: use statechanged
 * when there is an error the application stalls
+
+Listing files:
+* problem when the extension is uppercase
 
 Properties change:
 - IE: doesn't accept getting and setting of new properties; 
@@ -19,11 +24,3 @@ Properties change:
 
 Design:
 * IE: extra padding for the form element
-
-Improvements
-============
-Drag and drop related:
-- the dragging copy always offsets down and left 
-
-Upload related:
-- mask the file input with an image
