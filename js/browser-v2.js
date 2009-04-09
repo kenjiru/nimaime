@@ -270,7 +270,7 @@ function addFile (file)
 
 function detailsFill(file)
 {
-	var img = file.getElementsByTagName('img')[0];
+	var img = $(file.getElementsByTagName('img')[0]);
 	var name = img.getProperty('alt');
 	var desc = img.getProperty('desc');
 	var ext = name.substring(name.lastIndexOf('.'));

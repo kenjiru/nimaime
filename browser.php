@@ -15,5 +15,8 @@ while (false !== ($child_dir = readdir ($dir_h))) {
 	}
 }
 
-require_once ("templates/browser-v2.tpl.php");
+if (isset($_GET['v']) && $_GET['v'] === "1")
+	require_once ("templates/browser.tpl.php");
+else
+	require_once ("templates/browser-v2.tpl.php");
 ?>

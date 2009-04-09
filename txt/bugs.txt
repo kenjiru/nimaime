@@ -1,5 +1,6 @@
 Major bugs
 ==========
+
 Drag and drop:
 - clicking with the right mouse button on an image, selects the image for drag 
   and drop 

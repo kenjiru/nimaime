@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/mootools-beta-1.2b2.js"></script>
 	<script type="text/javascript" src="js/browser.js"></script>
 	<script type="text/javascript" src="js/upload.js"></script>
+	
 </head>
 
 <body>
