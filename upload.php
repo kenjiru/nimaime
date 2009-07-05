@@ -41,6 +41,10 @@ if (isset($_FILES["upload_files"]))
 else
 	die('No files specified!');
 
+// check that the folder has associated extensions
+if ($allowed_dirs[$dir_name] === "") 
+	die('No extensions specified for this directory');
+
 // move the files
 $upload_moved = array();
 $upload_errors = array();

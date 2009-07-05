@@ -9,7 +9,12 @@ else
 	
 // check if the directory is allowed
 if (false === array_key_exists($dir, $allowed_dirs))
-	die('the directory is not allowed');
+	die('Error: The directory is not allowed.');
+	
+// check that the folder has associated extensions
+if ($allowed_dirs[$dir] === "") 
+	die('Error: No extensions specified for this directory. <br/>'.
+		'Please check the configuration file!');
 
 $dir = $root_dir. $dir. "/";
 $dir_thumbnails = $dir. "thumbnails/";

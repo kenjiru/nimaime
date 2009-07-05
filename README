@@ -1,0 +1,39 @@
+Nimaime
+=======
+Author: kenjiru <kenjiru dot ro at gmail dot com>
+Homepage: http://kenjiru.ro
+
+What is it?
+===========
+Nimaime is a simple JavaScript upload manager.
+
+Installation
+============
+Just copy the folder somewhere on the server.
+
+Configuration
+=============
+Before running the application you have to edit the file 
+	'includes/config.inc.php'
+
+1. Specify the upload path which contains the upload folders. Do this by 
+editing the variable $root_dir. 
+
+2. Next you have to define the upload folders and the extensions associated 
+with each folder. Only the folders specified in this variable will be 
+used by the application.
+
+The variable should look like this:
+
+$allowed_dirs = array("Images" => ".jpg .jpeg .png",
+	"Movies" => ".flv");
+
+There are 2 folders:
+* "Images", which allows files with the extensions .jpg, .jpeg and .png
+* "Movies", which allows files with the extension .flv
+
+3. Create the actual upload folder to which is pointing the variable $root_dir 
+and give it read/write permissions.
+
+The individual upload folders will be created automatically based on the 
+$allowed_dirs variable. 
